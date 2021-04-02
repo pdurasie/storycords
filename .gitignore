@@ -3,8 +3,6 @@
 # Files and directories created by pub
 .dart_tool/
 .packages
-.idea*
-.idea/libraries/
 build/
 # If you're building an application, you may want to check-in your pubspec.lock
 pubspec.lock
@@ -13,13 +11,6 @@ pubspec.lock
 *.ipr
 *.iws
 .idea/*
-
-.idea/libraries/Flutter_Plugins.xml
-.idea/libraries/Dart_Packages.xml
-
-
-.flutter-plugins
-.flutter-plugins-dependencies
 
 # Directory created by dartdoc
 # If you don't generate documentation locally you can remove this line.
