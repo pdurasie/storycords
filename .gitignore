@@ -12,6 +12,9 @@ pubspec.lock
 *.iws
 .idea/*
 
+.flutter-plugins
+.flutter-plugins-dependencies
+
 # Directory created by dartdoc
 # If you don't generate documentation locally you can remove this line.
 doc/api/

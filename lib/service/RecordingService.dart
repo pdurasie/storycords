@@ -1,4 +1,4 @@
-import 'dart:core';
+import 'dart:io';
 
 import 'package:flutter_sound/flutter_sound.dart';
 
@@ -10,5 +10,12 @@ class RecordingService {
 
   RecordingService(this._soundRecorder);
 
-  record() {}
+  record() async {
+    _soundRecorder.openAudioSession();
+    await _soundRecorder.startRecorder(codec: _getCodec());
+  }
+
+  Codec _getCodec() {
+    return Platform.isAndroid ? Codec.opusWebM : Codec.opusCAF;
+  }
 }
