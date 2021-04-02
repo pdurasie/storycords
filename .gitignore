@@ -3,10 +3,20 @@
 # Files and directories created by pub
 .dart_tool/
 .packages
-.idea
+.idea*
+.idea/libraries/
 build/
 # If you're building an application, you may want to check-in your pubspec.lock
 pubspec.lock
+
+*.iml
+*.ipr
+*.iws
+.idea/*
+
+.idea/libraries/Flutter_Plugins.xml
+.idea/libraries/Dart_Packages.xml
+
 
 .flutter-plugins
 .flutter-plugins-dependencies
@@ -23,3 +33,4 @@ doc/api/
 *.js_
 *.js.deps
 *.js.map
+/.idea/
