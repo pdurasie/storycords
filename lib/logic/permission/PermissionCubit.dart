@@ -3,7 +3,7 @@ import 'package:storycords/logic/permission/PermissionService.dart';
 import 'package:storycords/logic/permission/PermissionState.dart';
 
 class PermissionCubit extends Cubit<PermissionState> {
-  PermissionCubit() : super(PermissionDenied());
+  PermissionCubit() : super(PermissionInitial());
 
   requestPermission(PermissionType type) async {
     emit(await PermissionService.ensurePermission(type));

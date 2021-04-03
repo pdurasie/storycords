@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter_sound/flutter_sound.dart';
-import 'package:storycords/logic/permission/PermissionService.dart';
 
 /// This class is responsible for capturing sound.
 ///
@@ -12,13 +11,23 @@ class RecordingService {
   RecordingService(this._soundRecorder);
 
   record() async {
-    await PermissionService.ensurePermission(PermissionType.Microphone);
-    //TODO if permission state != errorful
     _soundRecorder.openAudioSession();
     await _soundRecorder.startRecorder(codec: _getCodec());
   }
 
   Codec _getCodec() {
     return Platform.isAndroid ? Codec.opusWebM : Codec.opusCAF;
+  }
+
+  pauseRecording() {
+    _soundRecorder.pauseRecorder();
+  }
+
+  resumeRecording() {
+    _soundRecorder.resumeRecorder();
+  }
+
+  Future<String?> stopRecording() async {
+    return await _soundRecorder.stopRecorder();
   }
 }
