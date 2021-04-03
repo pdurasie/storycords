@@ -24,8 +24,14 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # BLoCs.
   flutter_bloc: ^7.0.0
+  # Library for recording and playing sound.
   flutter_sound: ^8.0.0+6
+  # Get paths to device specific directories.
+  path_provider: ^2.0.1
+  # Request cross-platform permissions.
+  permission_handler: ^6.1.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

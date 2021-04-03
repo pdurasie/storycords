@@ -1,3 +1,6 @@
+
+import 'package:permission_handler/permission_handler.dart';
+
 enum PermissionType {
   Microphone,
 }
@@ -17,6 +20,23 @@ class PermissionService {
   }
 
   static _getMicrophonePermission() async {
-    //external library? what does it return?
+    //bloc state : Requesting -> show rationale
+    PermissionStatus status = await Permission.microphone.request();
+    _handleStatus(status);
+  }
+
+  static openAppSettingsForPermission() {
+    openAppSettings();
+  }
+
+  static _handleStatus(PermissionStatus status) {
+    if (status.isGranted || status.isLimited) {
+      return;
+    } else if (status.isPermanentlyDenied) {
+      //set bloc state permanently denied -> show dialog leading to app settings.Pass on the function to do that
+    } else if (status.isRestricted) {
+      // set bloc state restricted
+    } else {
+  //set bloc state denied-> show dialog
   }
 }
