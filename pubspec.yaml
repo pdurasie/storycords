@@ -25,6 +25,7 @@ dependencies:
     sdk: flutter
 
   # BLoCs.
+  bloc: ^7.0.0
   flutter_bloc: ^7.0.0
   # Library for recording and playing sound.
   flutter_sound: ^8.0.0+6
