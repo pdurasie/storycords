@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_sound/flutter_sound.dart';
-import 'package:storycords/service/PermissionService.dart';
+import 'package:storycords/logic/permission/PermissionService.dart';
 
 /// This class is responsible for capturing sound.
 ///
