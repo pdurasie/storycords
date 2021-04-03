@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_sound/flutter_sound.dart';
+import 'package:path_provider/path_provider.dart';
 
 /// This class is responsible for capturing sound.
 ///
@@ -11,8 +12,11 @@ class RecordingService {
   RecordingService(this._soundRecorder);
 
   record() async {
-    _soundRecorder.openAudioSession();
-    await _soundRecorder.startRecorder(codec: _getCodec());
+    await _soundRecorder.openAudioSession();
+    Directory tempDir = await getApplicationDocumentsDirectory();
+    String tempPath = tempDir.path;
+    _soundRecorder.startRecorder(
+        toFile: '${tempPath}/foo.aac', codec: Codec.aacMP4);
   }
 
   Codec _getCodec() {
