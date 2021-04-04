@@ -10,24 +10,22 @@ class WelcomeHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Positioned(
-      child: Container(
-        height: size.height * headerSizeMultiplier,
-        color: colorPrimary,
-        child: Align(
-          alignment: AlignmentDirectional.centerStart,
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: paddingLarge),
-            child: RichText(
-                text: TextSpan(children: [
-              TextSpan(
-                  text: "STORYCORDS",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline5!
-                      .copyWith(fontWeight: FontWeight.w500)),
-            ])),
-          ),
+    return Container(
+      height: size.height * headerSizeMultiplier,
+      color: colorPrimary,
+      child: Align(
+        alignment: AlignmentDirectional.centerStart,
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: paddingLarge),
+          child: RichText(
+              text: TextSpan(children: [
+            TextSpan(
+                text: "STORYCORDS",
+                style: Theme.of(context)
+                    .textTheme
+                    .headline5!
+                    .copyWith(fontWeight: FontWeight.w500)),
+          ])),
         ),
       ),
     );

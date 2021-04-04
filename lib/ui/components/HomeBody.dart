@@ -13,34 +13,33 @@ class HomeBodyWidget extends StatelessWidget {
   const HomeBodyWidget({
     Key? key,
   }) : super(key: key);
-
+//top: MediaQuery.of(context).size.height * _bodyTopOffsetMultiplier,
   @override
   Widget build(BuildContext context) {
-    return Positioned.fill(
-      top: MediaQuery.of(context).size.height * _bodyTopOffsetMultiplier,
-      child: SingleChildScrollView(
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(60), topRight: Radius.circular(60)),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              //this container makes sure everything is below the circular main card radius
-              Container(
-                  height: MediaQuery.of(context).size.height * _bodyOffset),
-              HomeCategoryTitle("Gerade beliebt"),
-              HomeCordCard(),
-              HomeCordCard(),
-              HomeCordCard(),
-              HomeCordCard(),
-              HomeCordCard(),
-              HomeCordCard(),
-              HomeCordCard(),
-            ],
-          ),
+    return SingleChildScrollView(
+      child: Container(
+        margin: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * _bodyTopOffsetMultiplier,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(60), topRight: Radius.circular(60)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            //this container makes sure everything is below the circular main card radius
+            Container(height: MediaQuery.of(context).size.height * _bodyOffset),
+            HomeCategoryTitle("Gerade beliebt"),
+            HomeCordCard(),
+            HomeCordCard(),
+            HomeCordCard(),
+            HomeCordCard(),
+            HomeCordCard(),
+            HomeCordCard(),
+            HomeCordCard(),
+          ],
         ),
       ),
     );

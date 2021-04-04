@@ -11,13 +11,11 @@ class ScreenHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // we want to implement a sort of parallax behaviour,
+      // so header and body are aligned in a stack where we scroll
+      // over the header.
       body: Stack(
         children: [
-          //this is needed so that the stack fills the entire screen
-          Container(
-            height: double.infinity,
-            width: double.infinity,
-          ),
           WelcomeHeaderWidget(),
           HomeBodyWidget(),
         ],
