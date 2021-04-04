@@ -18,7 +18,6 @@ class HomeBodyWidget extends StatelessWidget {
       top: MediaQuery.of(context).size.height * _bodyTopOffsetMultiplier,
       child: SingleChildScrollView(
         child: Container(
-          height: 300,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
