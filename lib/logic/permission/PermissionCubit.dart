@@ -2,6 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:storycords/logic/permission/PermissionService.dart';
 import 'package:storycords/logic/permission/PermissionState.dart';
 
+/// Let's keep this to reuse this later for different functionalities
+/// that need Permissions.
 class PermissionCubit extends Cubit<PermissionState> {
   PermissionCubit() : super(PermissionInitial());
 
