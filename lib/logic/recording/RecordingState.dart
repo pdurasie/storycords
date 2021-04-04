@@ -8,10 +8,6 @@ class RecordingInProgress extends RecordingState {}
 
 class RecordingIsOnHold extends RecordingState {}
 
-class RecordingSuccess extends RecordingState {
-  final String soundUrl;
-
-  const RecordingSuccess(this.soundUrl);
-}
+class RecordingSuccess extends RecordingState {}
 
 class RecordingFailure extends RecordingState {}

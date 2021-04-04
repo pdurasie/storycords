@@ -19,11 +19,8 @@ class RecordingBloc extends Bloc<RecordingEvent, RecordingState> {
         //recordingService.pauseRecording();
         yield RecordingIsOnHold();
       } else if (event is RecordingEnded) {
-        String? url = await RecordingService.stopRecording();
-        if (url != null)
-          yield RecordingSuccess(url);
-        else
-          yield RecordingFailure();
+        await RecordingService.stopRecording();
+        yield RecordingSuccess();
       }
     } catch (_) {
       //_recordingService.flush();
