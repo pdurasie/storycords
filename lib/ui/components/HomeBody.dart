@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:storycords/ui/components/HomeWelcomeHeader.dart';
 
 import 'HomeCategoryTitle.dart';
-import 'HomeCordSelection.dart';
+import 'HomeCordCard.dart';
 
 const _bodyOffset = 0.07;
 
@@ -31,7 +31,13 @@ class HomeBodyWidget extends StatelessWidget {
               //this container makes sure everything is below the circular main card radius
               Container(
                   height: MediaQuery.of(context).size.height * _bodyOffset),
-              HomeCategoryTitle(),
+              HomeCategoryTitle("Gerade beliebt"),
+              HomeCordCard(),
+              HomeCordCard(),
+              HomeCordCard(),
+              HomeCordCard(),
+              HomeCordCard(),
+              HomeCordCard(),
               HomeCordCard(),
             ],
           ),
