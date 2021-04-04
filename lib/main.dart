@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:storycords/logic/recording/RecordingBloc.dart';
-import 'package:storycords/logic/recording/RecordingState.dart';
-
-import 'logic/recording/RecordingEvent.dart';
+import 'package:storycords/style.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,94 +11,44 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Storycords',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: colorPrimary,
+        textTheme:
+            Theme.of(context).textTheme.apply(bodyColor: colorTextPrimary),
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("Storycords"),
-        ),
-        body: BlocProvider(
-            create: (context) => RecordingBloc(), child: RecordingButton()),
+        body: HeaderWidget(),
       ),
     );
   }
 }
 
-class RecordingButton extends StatelessWidget {
+class HeaderWidget extends StatelessWidget {
+  const HeaderWidget() : super();
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RecordingBloc, RecordingState>(
-        builder: (context, state) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+    final size = MediaQuery.of(context).size;
+    return Container(
+      height: size.height * 0.2,
+      width: size.width,
+      color: colorPrimary,
+      child: Stack(
         children: [
-          _recordingWidgetMappedToState(state),
-        ],
-      );
-    });
-  }
-}
-
-class RecordingInProgressWidget extends StatelessWidget {
-  const RecordingInProgressWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text("You are recording right now."),
-        GestureDetector(
-          child: Icon(Icons.fiber_manual_record),
-          onTap: () async {
-            BlocProvider.of<RecordingBloc>(context).add(RecordingEnded());
-          },
-        ),
-      ],
-    );
-  }
-}
-
-_recordingWidgetMappedToState(RecordingState state) {
-  if (state is RecordingInitial) {
-    return RecordingInitialWidget();
-  } else if (state is RecordingInProgress) {
-    return RecordingInProgressWidget();
-  } else if (state is RecordingSuccess) {
-    return RecordingSuccessWidget();
-  }
-}
-
-class RecordingSuccessWidget extends StatelessWidget {
-  const RecordingSuccessWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [Text("You have recorded successfully.")],
-    );
-  }
-}
-
-class RecordingInitialWidget extends StatelessWidget {
-  const RecordingInitialWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          Text("Start recording!"),
-          GestureDetector(
-            child: Icon(Icons.mic),
-            onTap: () async {
-              BlocProvider.of<RecordingBloc>(context).add(RecordingStarted());
-            },
+          Positioned(
+            bottom: size.height * 0.05,
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: paddingDefault),
+              child: RichText(
+                  text: TextSpan(children: [
+                TextSpan(
+                    text: "WILLKOMMEN ZURÜCK",
+                    style: Theme.of(context).textTheme.bodyText2),
+                TextSpan(text: "\n"),
+                TextSpan(
+                    text: "Patrick",
+                    style: Theme.of(context).textTheme.bodyText1),
+              ])),
+            ),
           ),
         ],
       ),
