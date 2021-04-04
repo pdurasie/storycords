@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:storycords/style.dart';
-import 'package:storycords/ui/components/WelcomeHeader.dart';
+import 'package:storycords/ui/ScreenHome.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,9 +17,7 @@ class MyApp extends StatelessWidget {
             .textTheme
             .apply(bodyColor: colorTextPrimary, fontFamily: "Now"),
       ),
-      home: Scaffold(
-        body: WelcomeHeaderWidget(),
-      ),
+      home: ScreenHome(),
     );
   }
 }
