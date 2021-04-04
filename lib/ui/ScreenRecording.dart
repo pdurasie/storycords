@@ -20,20 +20,19 @@ Scaffold _buildRecordingPage() {
         create: (context) => RecordingBloc(), child: RecordingButton()),
   );
 }
-}
 
 class RecordingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RecordingBloc, RecordingState>(
         builder: (context, state) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _recordingWidgetMappedToState(state),
-            ],
-          );
-        });
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _recordingWidgetMappedToState(state),
+        ],
+      );
+    });
   }
 }
 
