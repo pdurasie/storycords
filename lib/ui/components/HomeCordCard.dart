@@ -12,7 +12,7 @@ class HomeCordCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: paddingDefault),
+      padding: const EdgeInsets.all(paddingDefault),
       child: SizedBox(
         height: 120,
         width: MediaQuery.of(context).size.width,
@@ -22,6 +22,7 @@ class HomeCordCard extends StatelessWidget {
         // of the ClipRRect with a container with white background, so that
         // the shadow of your underlying container doesn't shine through.
         child: Stack(children: [
+          // Dummy container for shadow
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(
@@ -35,6 +36,7 @@ class HomeCordCard extends StatelessWidget {
               ],
             ),
           ),
+          // The actual card body
           ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(_cordCardRadius)),
             child: Container(

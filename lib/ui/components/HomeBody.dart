@@ -19,6 +19,7 @@ class HomeBodyWidget extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         margin: EdgeInsets.only(
+          // add top margin to have only slight overlap to the header
           top: MediaQuery.of(context).size.height * _bodyTopOffsetMultiplier,
         ),
         decoration: BoxDecoration(
