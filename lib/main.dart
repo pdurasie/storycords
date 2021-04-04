@@ -12,8 +12,9 @@ class MyApp extends StatelessWidget {
       title: 'Storycords',
       theme: ThemeData(
         primaryColor: colorPrimary,
-        textTheme:
-            Theme.of(context).textTheme.apply(bodyColor: colorTextPrimary),
+        textTheme: Theme.of(context)
+            .textTheme
+            .apply(bodyColor: colorTextPrimary, fontFamily: "Now"),
       ),
       home: Scaffold(
         body: HeaderWidget(),
@@ -37,16 +38,19 @@ class HeaderWidget extends StatelessWidget {
           Positioned(
             bottom: size.height * 0.05,
             child: Container(
-              margin: EdgeInsets.symmetric(horizontal: paddingDefault),
+              margin: EdgeInsets.symmetric(horizontal: paddingLarge),
               child: RichText(
                   text: TextSpan(children: [
                 TextSpan(
-                    text: "WILLKOMMEN ZURÜCK",
-                    style: Theme.of(context).textTheme.bodyText2),
+                    text: "WILLKOMMEN ZURÜCK,",
+                    style: Theme.of(context).textTheme.bodyText1),
                 TextSpan(text: "\n"),
                 TextSpan(
                     text: "Patrick",
-                    style: Theme.of(context).textTheme.bodyText1),
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline5!
+                        .copyWith(fontWeight: FontWeight.w600)),
               ])),
             ),
           ),
