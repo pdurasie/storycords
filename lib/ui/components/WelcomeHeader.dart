@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../style.dart';
 
 class WelcomeHeaderWidget extends StatelessWidget {
+  static const headerSizeMultiplier = 0.25;
+
   const WelcomeHeaderWidget() : super();
 
   @override
@@ -10,7 +12,7 @@ class WelcomeHeaderWidget extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Positioned(
       child: Container(
-        height: size.height * 0.2,
+        height: size.height * headerSizeMultiplier,
         width: size.width,
         color: colorPrimary,
         child: Align(

@@ -19,7 +19,7 @@ class ScreenHome extends StatelessWidget {
             width: double.infinity,
           ),
           WelcomeHeaderWidget(),
-          HomeBodyWidget()
+          HomeBodyWidget(),
         ],
       ),
     );
