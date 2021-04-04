@@ -27,8 +27,8 @@ dependencies:
   # BLoCs.
   bloc: ^7.0.0
   flutter_bloc: ^7.0.0
-  # Library for recording and playing sound.
-  flutter_sound: ^8.0.0+6
+  # Library for recording sound.
+  record: ^2.1.0+1
   # Get paths to device specific directories.
   path_provider: ^2.0.1
   # Request cross-platform permissions.

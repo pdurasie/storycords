@@ -15,6 +15,8 @@ class PermissionService {
       PermissionType permissionType) async {
     Permission permission = _mapPermissionTypeToPermission(permissionType);
 
+    //Does this work as expected? For my test device it showed me the
+    // system dialog right away
     if (await _shouldShowRationale(permission)) {
       return PermissionShowRationale();
     } else {

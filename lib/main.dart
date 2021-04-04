@@ -1,24 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_sound/flutter_sound.dart';
-import 'package:storycords/logic/permission/PermissionService.dart';
 import 'package:storycords/logic/recording/RecordingBloc.dart';
-import 'package:storycords/logic/recording/RecordingService.dart';
+import 'package:storycords/logic/recording/RecordingState.dart';
 
+import 'logic/permission/PermissionService.dart';
 import 'logic/recording/RecordingEvent.dart';
 
 void main() {
-  final _recorder = FlutterSoundRecorder();
-  final _recordingService = RecordingService(_recorder);
-
-  runApp(MyApp(_recordingService));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final RecordingService _recordingService;
-
-  MyApp(this._recordingService);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,8 +19,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: BlocProvider(
-          create: (context) =>
-              RecordingBloc(recordingService: _recordingService),
+          create: (context) => RecordingBloc(),
           child: Scaffold(body: RecordingButton())),
     );
   }
@@ -38,13 +29,44 @@ class RecordingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: GestureDetector(
-        child: Icon(Icons.mic),
-        onTap: () async {
-          await PermissionService.ensurePermission(PermissionType.Microphone);
-          BlocProvider.of<RecordingBloc>(context).add(RecordingStarted());
-        },
-      ),
+      child:
+          BlocBuilder<RecordingBloc, RecordingState>(builder: (context, state) {
+        if (state is RecordingInitial) {
+          return Center(
+            child: Column(
+              children: [
+                Text("Start recording!"),
+                GestureDetector(
+                  child: Icon(Icons.mic),
+                  onTap: () async {
+                    await PermissionService.ensurePermission(
+                        PermissionType.Microphone);
+                    BlocProvider.of<RecordingBloc>(context)
+                        .add(RecordingStarted());
+                  },
+                ),
+              ],
+            ),
+          );
+        } else if (state is RecordingInProgress) {
+          return Center(
+            child: Column(
+              children: [
+                Text("You are recording right now."),
+                GestureDetector(
+                  child: Icon(Icons.fiber_manual_record),
+                  onTap: () async {
+                    BlocProvider.of<RecordingBloc>(context)
+                        .add(RecordingEnded());
+                  },
+                ),
+              ],
+            ),
+          );
+        } else {
+          return Center();
+        }
+      }),
     );
   }
 }

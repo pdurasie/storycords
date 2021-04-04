@@ -1,24 +1,24 @@
 import 'dart:io';
 
-import 'package:flutter_sound/flutter_sound.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:record/record.dart';
+import 'package:storycords/logic/permission/PermissionService.dart';
 
 /// This class is responsible for capturing sound.
 ///
-/// It uses the [FlutterSoundRecorder] to manage this under the hood.
+/// It uses [Record] to manage this under the hood.
 class RecordingService {
-  FlutterSoundRecorder _soundRecorder;
-
-  RecordingService(this._soundRecorder);
-
-  record() async {
-    await _soundRecorder.openAudioSession();
-    Directory tempDir = await getApplicationDocumentsDirectory();
+  static record() async {
+    //TODO I have to test the Permissioning again because of rationaling
+    // TODO implement more logic for sound effect injection?
+    await PermissionService.ensurePermission(PermissionType.Microphone);
+    // TODO: only available on Android
+    Directory tempDir = (await getExternalStorageDirectory())!;
     String tempPath = tempDir.path;
-    _soundRecorder.startRecorder(
-        toFile: '${tempPath}/foo.aac', codec: Codec.aacMP4);
+    Record.start(path: '${tempPath}/foo.m4a');
   }
 
+/*
   Codec _getCodec() {
     return Platform.isAndroid ? Codec.opusWebM : Codec.opusCAF;
   }
@@ -30,8 +30,8 @@ class RecordingService {
   resumeRecording() {
     _soundRecorder.resumeRecorder();
   }
-
-  Future<String?> stopRecording() async {
-    return await _soundRecorder.stopRecorder();
+*/
+  static stopRecording() async {
+    await Record.stop();
   }
 }

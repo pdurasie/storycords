@@ -4,24 +4,22 @@ import 'package:storycords/logic/recording/RecordingService.dart';
 import 'package:storycords/logic/recording/RecordingState.dart';
 
 class RecordingBloc extends Bloc<RecordingEvent, RecordingState> {
-  final RecordingService recordingService;
-
-  RecordingBloc({required this.recordingService}) : super(RecordingInitial());
+  RecordingBloc() : super(RecordingInitial());
 
   @override
   Stream<RecordingState> mapEventToState(RecordingEvent event) async* {
     try {
       if (event is RecordingStarted) {
-        recordingService.record();
+        RecordingService.record();
         yield RecordingInProgress();
       } else if (event is RecordingResumed) {
-        recordingService.resumeRecording();
+        //recordingService.resumeRecording();
         yield RecordingInProgress();
       } else if (event is RecordingPaused) {
-        recordingService.pauseRecording();
+        //recordingService.pauseRecording();
         yield RecordingIsOnHold();
       } else if (event is RecordingEnded) {
-        String? url = await recordingService.stopRecording();
+        String? url = await RecordingService.stopRecording();
         if (url != null)
           yield RecordingSuccess(url);
         else
