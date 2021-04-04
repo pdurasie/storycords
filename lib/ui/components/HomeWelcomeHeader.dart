@@ -13,7 +13,6 @@ class WelcomeHeaderWidget extends StatelessWidget {
     return Positioned(
       child: Container(
         height: size.height * headerSizeMultiplier,
-        width: size.width,
         color: colorPrimary,
         child: Align(
           alignment: AlignmentDirectional.centerStart,

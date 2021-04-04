@@ -4,30 +4,6 @@ import '../../style.dart';
 
 const _cordCardRadius = 20.0;
 
-class HomeCordSelection extends StatelessWidget {
-  const HomeCordSelection({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Align(
-          alignment: AlignmentDirectional.centerStart,
-          child: Column(
-            children: [
-              SelectionTitleWidget(),
-              //display horizontal scrolling view of cordCards
-              HomeCordCard(),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
 class HomeCordCard extends StatelessWidget {
   const HomeCordCard({
     Key? key,
@@ -88,13 +64,12 @@ class HomeCordCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           IconButton(
-            alignment: Alignment.center,
             icon: Icon(Icons.keyboard_arrow_up),
             onPressed: () {},
           ),
           Text(
             "32",
-            textAlign: TextAlign.right,
+            textAlign: TextAlign.left,
           ),
           IconButton(
             icon: Icon(Icons.keyboard_arrow_down),
@@ -164,10 +139,10 @@ class TextDataContainer extends StatelessWidget {
           children: [
             TextSpan(
                 text:
-                    "Was war die größte Katastrophe auf deiner Arbeit, die je passiert ist?"),
+                    "Was war die größte Katastrophe, die je auf deiner Arbeit passiert ist?"),
             TextSpan(text: "\n"),
             TextSpan(
-                text: "von Patrick", style: Theme.of(context).textTheme.caption)
+                text: "von patDog", style: Theme.of(context).textTheme.caption)
           ],
           style: Theme.of(context).textTheme.bodyText1,
         ),
@@ -185,22 +160,5 @@ class TextDataContainer extends StatelessWidget {
       )),
       WidgetSpan(child: Image.asset('asset/images/button-16px.png'))
     ]));
-  }
-}
-
-class SelectionTitleWidget extends StatelessWidget {
-  const SelectionTitleWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(paddingDefault),
-      child: Text(
-        "Gerade beliebt",
-        style: Theme.of(context).textTheme.headline6,
-      ),
-    );
   }
 }

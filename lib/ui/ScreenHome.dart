@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'components/HomeBodyWidget.dart';
-import 'components/WelcomeHeader.dart';
+import 'components/HomeBody.dart';
+import 'components/HomeWelcomeHeader.dart';
 
 class ScreenHome extends StatelessWidget {
   const ScreenHome({

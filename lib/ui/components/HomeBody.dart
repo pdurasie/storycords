@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:storycords/ui/components/WelcomeHeader.dart';
+import 'package:storycords/ui/components/HomeWelcomeHeader.dart';
 
+import 'HomeCategoryTitle.dart';
 import 'HomeCordSelection.dart';
 
+const _bodyOffset = 0.07;
+
 class HomeBodyWidget extends StatelessWidget {
-  static const _bodyOffset = 0.07;
   final _bodyTopOffsetMultiplier =
       WelcomeHeaderWidget.headerSizeMultiplier - _bodyOffset;
 
@@ -24,11 +26,13 @@ class HomeBodyWidget extends StatelessWidget {
                 topLeft: Radius.circular(60), topRight: Radius.circular(60)),
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //this container makes sure everything is below the circular card
+              //this container makes sure everything is below the circular main card radius
               Container(
                   height: MediaQuery.of(context).size.height * _bodyOffset),
-              HomeCordSelection(),
+              HomeCategoryTitle(),
+              HomeCordCard(),
             ],
           ),
         ),
