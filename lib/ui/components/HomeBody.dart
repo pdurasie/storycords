@@ -33,13 +33,11 @@ class HomeBodyWidget extends StatelessWidget {
             //this container makes sure everything is below the circular main card radius
             Container(height: MediaQuery.of(context).size.height * _bodyOffset),
             HomeCategoryTitle("Gerade beliebt"),
-            HomeCordCard(),
-            HomeCordCard(),
-            HomeCordCard(),
-            HomeCordCard(),
-            HomeCordCard(),
-            HomeCordCard(),
-            HomeCordCard(),
+            HomeCordCard(
+                "Was war die größte Katastrophe, die je auf deiner Arbeit passiert ist, sach mal?",
+                "patDog",
+                81,
+                320),
           ],
         ),
       ),

@@ -5,9 +5,12 @@ import '../../style.dart';
 const _cordCardRadius = 20.0;
 
 class HomeCordCard extends StatelessWidget {
-  const HomeCordCard({
-    Key? key,
-  }) : super(key: key);
+  final String title;
+  final String author;
+  final int buttons;
+  final int rating;
+  const HomeCordCard(this.title, this.author, this.buttons, this.rating)
+      : super();
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +46,10 @@ class HomeCordCard extends StatelessWidget {
               color: Colors.white,
               child: Row(
                 children: [
-                  CordCardImage(),
+                  //CordCardImage(),
                   Expanded(
                     flex: 2,
-                    child: TextDataContainer(),
+                    child: TextDataContainer(title, author, buttons),
                   ),
                   buildRatingBox()
                 ],
@@ -60,7 +63,7 @@ class HomeCordCard extends StatelessWidget {
 
   SizedBox buildRatingBox() {
     return SizedBox(
-      width: 40,
+      width: 50,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -70,7 +73,7 @@ class HomeCordCard extends StatelessWidget {
             onPressed: () {},
           ),
           Text(
-            "32",
+            rating.toString(),
             textAlign: TextAlign.left,
           ),
           IconButton(
@@ -119,14 +122,15 @@ class CordCardImage extends StatelessWidget {
 }
 
 class TextDataContainer extends StatelessWidget {
-  const TextDataContainer({
-    Key? key,
-  }) : super(key: key);
+  final String title;
+  final String author;
+  final int buttons;
+  const TextDataContainer(this.title, this.author, this.buttons) : super();
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 12.0, left: 6.0, right: 6.0),
+      padding: const EdgeInsets.only(top: 18.0, bottom: 6.0, left: 8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [_buildTitleRow(context), _buildBottomRow(context)],
@@ -139,12 +143,10 @@ class TextDataContainer extends StatelessWidget {
       child: RichText(
         text: TextSpan(
           children: [
-            TextSpan(
-                text:
-                    "Was war die größte Katastrophe, die je auf deiner Arbeit passiert ist?"),
+            TextSpan(text: title),
             TextSpan(text: "\n"),
             TextSpan(
-                text: "von patDog", style: Theme.of(context).textTheme.caption)
+                text: "von $author", style: Theme.of(context).textTheme.caption)
           ],
           style: Theme.of(context).textTheme.bodyText1,
         ),
@@ -155,7 +157,8 @@ class TextDataContainer extends StatelessWidget {
   RichText _buildBottomRow(BuildContext context) {
     return RichText(
         text: TextSpan(children: [
-      TextSpan(text: "84", style: Theme.of(context).textTheme.caption),
+      TextSpan(
+          text: buttons.toString(), style: Theme.of(context).textTheme.caption),
       WidgetSpan(
           child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 2),
