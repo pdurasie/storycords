@@ -28,3 +28,4 @@ doc/api/
 *.js.deps
 *.js.map
 /.idea/
+/local.properties

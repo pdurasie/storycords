@@ -142,7 +142,11 @@ class TextDataContainer extends StatelessWidget {
           child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 2),
       )),
-      WidgetSpan(child: Image.asset('asset/images/button-16px.png'))
+      WidgetSpan(
+          child: Image.asset(
+        'asset/images/button_icon_58.png',
+        scale: 2.5,
+      ))
     ]));
   }
 }
