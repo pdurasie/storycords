@@ -11,7 +11,13 @@ class HomeBodyWidget extends StatelessWidget {
   final _bodyTopOffsetMultiplier =
       WelcomeHeaderWidget.headerSizeMultiplier - _bodyOffset;
 
-  const HomeBodyWidget({
+  final List<Cord> cords = List.generate(
+    8,
+    (index) =>
+        Cord("Dies ist Cord Nummer $index", "von mir", index * 12, index * 121),
+  );
+
+  HomeBodyWidget({
     Key? key,
   }) : super(key: key);
 //top: MediaQuery.of(context).size.height * _bodyTopOffsetMultiplier,
@@ -34,13 +40,7 @@ class HomeBodyWidget extends StatelessWidget {
             //this container makes sure everything is below the circular main card radius
             Container(height: MediaQuery.of(context).size.height * _bodyOffset),
             HomeCategoryTitle("Gerade beliebt"),
-            HomeCordCard(
-              Cord(
-                  "Was war die größte Katastrophe, die je auf deiner Arbeit passiert ist, sach mal?",
-                  "patDog",
-                  81,
-                  320),
-            ),
+            for (Cord cord in cords) HomeCordCard(cord),
           ],
         ),
       ),
