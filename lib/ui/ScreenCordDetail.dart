@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:storycords/models/Cord.dart';
 import 'package:storycords/ui/components/CordRatingBox.dart';
+import 'package:storycords/ui/components/CordWidget.dart';
 
 class ScreenCordDetail extends StatelessWidget {
   final Cord _cord;
@@ -12,7 +13,7 @@ class ScreenCordDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
         child: Column(
           children: [
             Row(
@@ -27,9 +28,17 @@ class ScreenCordDetail extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              padding: const EdgeInsets.symmetric(vertical: 24.0),
               child: Text(_cord.description),
             ),
+            Divider(
+              color: Colors.grey,
+              height: 20,
+              thickness: 1,
+              indent: 10,
+              endIndent: 10,
+            ),
+            CordWidget()
           ],
         ),
       ),

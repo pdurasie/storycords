@@ -14,11 +14,12 @@ class HomeBodyWidget extends StatelessWidget {
   final List<Cord> cords = List.generate(
     8,
     (index) => Cord(
-        "Dies ist Cord Nummer $index",
-        "mir",
-        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. ",
-        index * 12,
-        index * 121),
+      title: "Dies ist Cord Nummer $index",
+      author: "mir",
+      description:
+          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. ",
+      rating: index * 12,
+    ),
   );
 
   HomeBodyWidget({

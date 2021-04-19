@@ -136,7 +136,7 @@ class TextDataContainer extends StatelessWidget {
     return RichText(
         text: TextSpan(children: [
       TextSpan(
-          text: _cord.buttons.toString(),
+          text: _cord.recordings?.length.toString(),
           style: Theme.of(context).textTheme.caption),
       WidgetSpan(
           child: Padding(

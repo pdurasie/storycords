@@ -1,11 +1,17 @@
-class Cord {
-  final String title;
-  final String author;
-  final String description;
-  final int buttons;
-  final int rating;
+import 'package:storycords/models/Recording.dart';
 
-  const Cord(
-      this.title, this.author, this.description, this.buttons, this.rating)
-      : super();
+class Cord {
+  String title = "";
+  String author = "";
+  String description = "";
+  int rating = 0;
+  List<Recording>? recordings;
+
+  Cord({
+    this.title = "",
+    this.author = "",
+    this.description = "",
+    this.rating = 0,
+    this.recordings,
+  }) : super();
 }
