@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:storycords/models/Cord.dart';
 import 'package:storycords/ui/ScreenCordDetail.dart';
+import 'package:storycords/ui/components/CordRatingBox.dart';
 
 import '../../style.dart';
 
@@ -52,37 +53,13 @@ class HomeCordCard extends StatelessWidget {
                       flex: 2,
                       child: TextDataContainer(_cord),
                     ),
-                    buildRatingBox()
+                    CordRatingBox(cord: _cord)
                   ],
                 ),
               ),
             ),
           ),
         ]),
-      ),
-    );
-  }
-
-  SizedBox buildRatingBox() {
-    return SizedBox(
-      width: 50,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          IconButton(
-            icon: Icon(Icons.keyboard_arrow_up),
-            onPressed: () {},
-          ),
-          Text(
-            _cord.rating.toString(),
-            textAlign: TextAlign.left,
-          ),
-          IconButton(
-            icon: Icon(Icons.keyboard_arrow_down),
-            onPressed: () {},
-          ),
-        ],
       ),
     );
   }
