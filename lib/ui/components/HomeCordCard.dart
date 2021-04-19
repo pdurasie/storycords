@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:storycords/models/Cord.dart';
+import 'package:storycords/ui/ScreenCordDetail.dart';
 
 import '../../style.dart';
 
 const _cordCardRadius = 20.0;
 
 class HomeCordCard extends StatelessWidget {
-  final String title;
-  final String author;
-  final int buttons;
-  final int rating;
-  const HomeCordCard(this.title, this.author, this.buttons, this.rating)
-      : super();
+  final Cord _cord;
+  const HomeCordCard(this._cord) : super();
 
   @override
   Widget build(BuildContext context) {
@@ -40,19 +38,23 @@ class HomeCordCard extends StatelessWidget {
             ),
           ),
           // The actual card body
-          ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(_cordCardRadius)),
-            child: Container(
-              color: Colors.white,
-              child: Row(
-                children: [
-                  //CordCardImage(),
-                  Expanded(
-                    flex: 2,
-                    child: TextDataContainer(title, author, buttons),
-                  ),
-                  buildRatingBox()
-                ],
+          GestureDetector(
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => ScreenCordDetail(_cord))),
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(_cordCardRadius)),
+              child: Container(
+                color: Colors.white,
+                child: Row(
+                  children: [
+                    //CordCardImage(),
+                    Expanded(
+                      flex: 2,
+                      child: TextDataContainer(_cord),
+                    ),
+                    buildRatingBox()
+                  ],
+                ),
               ),
             ),
           ),
@@ -73,7 +75,7 @@ class HomeCordCard extends StatelessWidget {
             onPressed: () {},
           ),
           Text(
-            rating.toString(),
+            _cord.rating.toString(),
             textAlign: TextAlign.left,
           ),
           IconButton(
@@ -122,10 +124,8 @@ class CordCardImage extends StatelessWidget {
 }
 
 class TextDataContainer extends StatelessWidget {
-  final String title;
-  final String author;
-  final int buttons;
-  const TextDataContainer(this.title, this.author, this.buttons) : super();
+  final Cord _cord;
+  const TextDataContainer(this._cord) : super();
 
   @override
   Widget build(BuildContext context) {
@@ -143,10 +143,11 @@ class TextDataContainer extends StatelessWidget {
       child: RichText(
         text: TextSpan(
           children: [
-            TextSpan(text: title),
+            TextSpan(text: _cord.title),
             TextSpan(text: "\n"),
             TextSpan(
-                text: "von $author", style: Theme.of(context).textTheme.caption)
+                text: "von ${_cord.author}",
+                style: Theme.of(context).textTheme.caption)
           ],
           style: Theme.of(context).textTheme.bodyText1,
         ),
@@ -158,7 +159,8 @@ class TextDataContainer extends StatelessWidget {
     return RichText(
         text: TextSpan(children: [
       TextSpan(
-          text: buttons.toString(), style: Theme.of(context).textTheme.caption),
+          text: _cord.buttons.toString(),
+          style: Theme.of(context).textTheme.caption),
       WidgetSpan(
           child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 2),

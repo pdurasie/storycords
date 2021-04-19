@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:storycords/models/Cord.dart';
 import 'package:storycords/ui/components/HomeWelcomeHeader.dart';
 
 import 'HomeCategoryTitle.dart';
@@ -34,10 +35,12 @@ class HomeBodyWidget extends StatelessWidget {
             Container(height: MediaQuery.of(context).size.height * _bodyOffset),
             HomeCategoryTitle("Gerade beliebt"),
             HomeCordCard(
-                "Was war die größte Katastrophe, die je auf deiner Arbeit passiert ist, sach mal?",
-                "patDog",
-                81,
-                320),
+              Cord(
+                  "Was war die größte Katastrophe, die je auf deiner Arbeit passiert ist, sach mal?",
+                  "patDog",
+                  81,
+                  320),
+            ),
           ],
         ),
       ),
