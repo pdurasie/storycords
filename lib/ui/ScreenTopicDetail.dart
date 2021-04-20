@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tonband/models/Cord.dart';
-import 'package:tonband/ui/components/CordRatingBox.dart';
-import 'package:tonband/ui/components/CordWidget.dart';
+import 'package:tonband/models/Topic.dart';
+import 'package:tonband/ui/components/TopicWidget.dart';
 
-class ScreenCordDetail extends StatelessWidget {
-  final Cord _cord;
+import 'components/TopicRatingBox.dart';
 
-  const ScreenCordDetail(this._cord) : super();
+class ScreenTopicDetail extends StatelessWidget {
+  final Topic _topic;
+
+  const ScreenTopicDetail(this._topic) : super();
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +21,16 @@ class ScreenCordDetail extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    _cord.title,
+                    _topic.title,
                     style: Theme.of(context).textTheme.headline3,
                   ),
                 ),
-                CordRatingBox(cord: _cord),
+                RatingBoxVertical(topic: _topic),
               ],
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 24.0),
-              child: Text(_cord.description),
+              child: Text(_topic.description),
             ),
             Divider(
               color: Colors.grey,
@@ -38,7 +39,7 @@ class ScreenCordDetail extends StatelessWidget {
               indent: 10,
               endIndent: 10,
             ),
-            CordWidget()
+            TopicWidget()
           ],
         ),
       ),

@@ -1,13 +1,13 @@
 import 'package:tonband/models/Recording.dart';
 
-class Cord {
+class Topic {
   String title = "";
   String author = "";
   String description = "";
   int rating = 0;
   List<Recording>? recordings;
 
-  Cord({
+  Topic({
     this.title = "",
     this.author = "",
     this.description = "",

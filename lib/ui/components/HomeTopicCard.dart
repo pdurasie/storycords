@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:tonband/models/Cord.dart';
-import 'package:tonband/ui/ScreenCordDetail.dart';
-import 'package:tonband/ui/components/CordRatingBox.dart';
+import 'package:tonband/models/Topic.dart';
+import 'package:tonband/ui/ScreenTopicDetail.dart';
 
 import '../../style.dart';
+import 'TopicRatingBox.dart';
 
 const _cordCardRadius = 20.0;
 
-class HomeCordCard extends StatelessWidget {
-  final Cord _cord;
-  const HomeCordCard(this._cord) : super();
+class HomeTopicCard extends StatelessWidget {
+  final Topic _topic;
+  const HomeTopicCard(this._topic) : super();
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class HomeCordCard extends StatelessWidget {
           // The actual card body
           GestureDetector(
             onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => ScreenCordDetail(_cord))),
+                builder: (context) => ScreenTopicDetail(_topic))),
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(_cordCardRadius)),
               child: Container(
@@ -51,9 +51,9 @@ class HomeCordCard extends StatelessWidget {
                     //CordCardImage(),
                     Expanded(
                       flex: 2,
-                      child: TextDataContainer(_cord),
+                      child: TextDataContainer(_topic),
                     ),
-                    CordRatingBox(cord: _cord)
+                    RatingBoxVertical(topic: _topic)
                   ],
                 ),
               ),
@@ -65,8 +65,9 @@ class HomeCordCard extends StatelessWidget {
   }
 }
 
-class CordCardImage extends StatelessWidget {
-  const CordCardImage({
+/*
+class TopicCardImage extends StatelessWidget {
+  const TopicCardImage({
     Key? key,
   }) : super(key: key);
 
@@ -100,9 +101,11 @@ class CordCardImage extends StatelessWidget {
   }
 }
 
+ */
+
 class TextDataContainer extends StatelessWidget {
-  final Cord _cord;
-  const TextDataContainer(this._cord) : super();
+  final Topic _topic;
+  const TextDataContainer(this._topic) : super();
 
   @override
   Widget build(BuildContext context) {
@@ -120,10 +123,10 @@ class TextDataContainer extends StatelessWidget {
       child: RichText(
         text: TextSpan(
           children: [
-            TextSpan(text: _cord.title),
+            TextSpan(text: _topic.title),
             TextSpan(text: "\n"),
             TextSpan(
-                text: "von ${_cord.author}",
+                text: "von ${_topic.author}",
                 style: Theme.of(context).textTheme.caption)
           ],
           style: Theme.of(context).textTheme.bodyText1,
@@ -136,7 +139,7 @@ class TextDataContainer extends StatelessWidget {
     return RichText(
         text: TextSpan(children: [
       TextSpan(
-          text: _cord.recordings?.length.toString(),
+          text: _topic.recordings?.length.toString(),
           style: Theme.of(context).textTheme.caption),
       WidgetSpan(
           child: Padding(

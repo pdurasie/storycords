@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tonband/models/Cord.dart';
+import 'package:tonband/models/Topic.dart';
 import 'package:tonband/ui/components/HomeWelcomeHeader.dart';
 
 import 'HomeCategoryTitle.dart';
-import 'HomeCordCard.dart';
+import 'HomeTopicCard.dart';
 
 const _bodyOffset = 0.07;
 
@@ -11,10 +11,11 @@ class HomeBodyWidget extends StatelessWidget {
   final _bodyTopOffsetMultiplier =
       WelcomeHeaderWidget.headerSizeMultiplier - _bodyOffset;
 
-  final List<Cord> cords = List.generate(
+  final List<Topic> topics = List.generate(
     8,
-    (index) => Cord(
-      title: "Dies ist Cord Nummer $index",
+    (index) => Topic(
+      title:
+          "Dies ist ein wundervolles, atemberaubendes Topic mit der Nummer $index",
       author: "mir",
       description:
           "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. ",
@@ -45,7 +46,7 @@ class HomeBodyWidget extends StatelessWidget {
             //this container makes sure everything is below the circular main card radius
             Container(height: MediaQuery.of(context).size.height * _bodyOffset),
             HomeCategoryTitle("Gerade beliebt"),
-            for (Cord cord in cords) HomeCordCard(cord),
+            for (Topic topic in topics) HomeTopicCard(topic),
           ],
         ),
       ),

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:tonband/models/Cord.dart';
+import 'package:tonband/models/Topic.dart';
 
-class CordRatingBox extends StatelessWidget {
-  const CordRatingBox({
+class RatingBoxVertical extends StatelessWidget {
+  const RatingBoxVertical({
     Key? key,
-    required Cord cord,
-  })   : _cord = cord,
+    required Topic topic,
+  })   : _topic = topic,
         super(key: key);
 
-  final Cord _cord;
+  final Topic _topic;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class CordRatingBox extends StatelessWidget {
             onPressed: () {},
           ),
           Text(
-            _cord.rating.toString(),
+            _topic.rating.toString(),
             textAlign: TextAlign.left,
           ),
           IconButton(

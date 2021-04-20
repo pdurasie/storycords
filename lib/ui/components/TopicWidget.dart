@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CordWidget extends StatelessWidget {
-  const CordWidget({
+class TopicWidget extends StatelessWidget {
+  const TopicWidget({
     Key? key,
   }) : super(key: key);
 
@@ -11,7 +11,7 @@ class CordWidget extends StatelessWidget {
   }
 }
 
-class CordPainter extends CustomPainter {
+class TopicPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint();
