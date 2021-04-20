@@ -22,7 +22,7 @@ class ScreenTopicDetail extends StatelessWidget {
                 Expanded(
                   child: Text(
                     _topic.title,
-                    style: Theme.of(context).textTheme.headline3,
+                    style: Theme.of(context).textTheme.headline4,
                   ),
                 ),
                 RatingBoxVertical(topic: _topic),
