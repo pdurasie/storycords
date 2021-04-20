@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
-import 'package:storycords/logic/permission/PermissionService.dart';
+import 'package:tonband/logic/permission/PermissionService.dart';
 
 /// This class is responsible for capturing sound.
 ///

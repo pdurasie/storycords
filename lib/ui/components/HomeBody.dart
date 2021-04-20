@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:storycords/models/Cord.dart';
-import 'package:storycords/ui/components/HomeWelcomeHeader.dart';
+import 'package:tonband/models/Cord.dart';
+import 'package:tonband/ui/components/HomeWelcomeHeader.dart';
 
 import 'HomeCategoryTitle.dart';
 import 'HomeCordCard.dart';

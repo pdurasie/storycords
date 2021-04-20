@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:permission_handler/permission_handler.dart';
-import 'package:storycords/logic/permission/PermissionState.dart';
+import 'package:tonband/logic/permission/PermissionState.dart';
 
 enum PermissionType {
   Microphone,

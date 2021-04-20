@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:storycords/style.dart';
-import 'package:storycords/ui/ScreenHome.dart';
+import 'package:tonband/style.dart';
+import 'package:tonband/ui/ScreenHome.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Storycords',
+      title: 'Tonband',
       theme: ThemeData(
         primaryColor: colorPrimary,
         textTheme: Theme.of(context)

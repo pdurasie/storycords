@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:storycords/models/Cord.dart';
-import 'package:storycords/ui/ScreenCordDetail.dart';
-import 'package:storycords/ui/components/CordRatingBox.dart';
+import 'package:tonband/models/Cord.dart';
+import 'package:tonband/ui/ScreenCordDetail.dart';
+import 'package:tonband/ui/components/CordRatingBox.dart';
 
 import '../../style.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:storycords/models/Cord.dart';
-import 'package:storycords/ui/components/CordRatingBox.dart';
-import 'package:storycords/ui/components/CordWidget.dart';
+import 'package:tonband/models/Cord.dart';
+import 'package:tonband/ui/components/CordRatingBox.dart';
+import 'package:tonband/ui/components/CordWidget.dart';
 
 class ScreenCordDetail extends StatelessWidget {
   final Cord _cord;

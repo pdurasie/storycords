@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:storycords/logic/recording/RecordingBloc.dart';
-import 'package:storycords/logic/recording/RecordingEvent.dart';
-import 'package:storycords/logic/recording/RecordingState.dart';
+import 'package:tonband/logic/recording/RecordingBloc.dart';
+import 'package:tonband/logic/recording/RecordingEvent.dart';
+import 'package:tonband/logic/recording/RecordingState.dart';
 
 class PageRecording extends StatelessWidget {
   @override
@@ -14,7 +14,7 @@ class PageRecording extends StatelessWidget {
 Scaffold _buildRecordingPage() {
   return Scaffold(
     appBar: AppBar(
-      title: Text("Storycords"),
+      title: Text("tonband"),
     ),
     body: BlocProvider(
         create: (context) => RecordingBloc(), child: RecordingButton()),

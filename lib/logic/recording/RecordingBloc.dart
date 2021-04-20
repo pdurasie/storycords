@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:storycords/logic/recording/RecordingEvent.dart';
-import 'package:storycords/logic/recording/RecordingService.dart';
-import 'package:storycords/logic/recording/RecordingState.dart';
+import 'package:tonband/logic/recording/RecordingEvent.dart';
+import 'package:tonband/logic/recording/RecordingService.dart';
+import 'package:tonband/logic/recording/RecordingState.dart';
 
 class RecordingBloc extends Bloc<RecordingEvent, RecordingState> {
   RecordingBloc() : super(RecordingInitial());

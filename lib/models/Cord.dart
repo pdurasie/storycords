@@ -1,4 +1,4 @@
-import 'package:storycords/models/Recording.dart';
+import 'package:tonband/models/Recording.dart';
 
 class Cord {
   String title = "";

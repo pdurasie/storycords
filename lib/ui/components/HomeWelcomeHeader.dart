@@ -20,7 +20,7 @@ class WelcomeHeaderWidget extends StatelessWidget {
           child: RichText(
               text: TextSpan(children: [
             TextSpan(
-                text: "STORYCORDS",
+                text: "TONBAND",
                 style: Theme.of(context)
                     .textTheme
                     .headline5!

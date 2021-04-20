@@ -1,4 +1,4 @@
-# storycords
+# Tonband
 
 Application for sharing stories via audio
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:storycords/models/Cord.dart';
+import 'package:tonband/models/Cord.dart';
 
 class CordRatingBox extends StatelessWidget {
   const CordRatingBox({

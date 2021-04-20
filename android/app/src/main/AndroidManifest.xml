@@ -1,11 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.klartraummedien.storycords">
+    package="de.klartraummedien.tonband">
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
    <application
-        android:label="storycords"
+        android:label="Tonband"
         android:icon="@mipmap/ic_launcher">
         <activity
-            android:name=".MainActivity"
+            android:name="de.klartraummedien.tonband.MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
