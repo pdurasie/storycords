@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tonband/models/Topic.dart';
 
 class RatingBoxVertical extends StatelessWidget {
   const RatingBoxVertical({
     Key? key,
-    required Topic topic,
-  })   : _topic = topic,
+    required int rating,
+  })   : _rating = rating,
         super(key: key);
 
-  final Topic _topic;
+  final int _rating;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class RatingBoxVertical extends StatelessWidget {
             onPressed: () {},
           ),
           Text(
-            _topic.rating.toString(),
+            _rating.toString(),
             textAlign: TextAlign.left,
           ),
           IconButton(

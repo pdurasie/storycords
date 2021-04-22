@@ -3,9 +3,9 @@ import 'package:tonband/models/Topic.dart';
 import 'package:tonband/ui/ScreenTopicDetail.dart';
 
 import '../../style.dart';
-import 'TopicRatingBox.dart';
+import 'VerticalRatingBox.dart';
 
-const _cordCardRadius = 20.0;
+const _topicCardRadius = 20.0;
 
 class HomeTopicCard extends StatelessWidget {
   final Topic _topic;
@@ -28,13 +28,13 @@ class HomeTopicCard extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(
-                Radius.circular(_cordCardRadius),
+                Radius.circular(_topicCardRadius),
               ),
               boxShadow: [
                 BoxShadow(
                     color: Colors.black.withOpacity(0.2),
                     offset: Offset(2, 2),
-                    blurRadius: 10.0),
+                    blurRadius: 5.0),
               ],
             ),
           ),
@@ -43,17 +43,16 @@ class HomeTopicCard extends StatelessWidget {
             onTap: () => Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => ScreenTopicDetail(_topic))),
             child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(_cordCardRadius)),
+              borderRadius: BorderRadius.all(Radius.circular(_topicCardRadius)),
               child: Container(
                 color: Colors.white,
                 child: Row(
                   children: [
-                    //CordCardImage(),
                     Expanded(
                       flex: 2,
                       child: TextDataContainer(_topic),
                     ),
-                    RatingBoxVertical(topic: _topic)
+                    RatingBoxVertical(rating: _topic.rating)
                   ],
                 ),
               ),

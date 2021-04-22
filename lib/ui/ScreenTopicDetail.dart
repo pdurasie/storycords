@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tonband/models/Topic.dart';
 import 'package:tonband/ui/components/TopicWidget.dart';
 
-import 'components/TopicRatingBox.dart';
+import 'components/VerticalRatingBox.dart';
 
 class ScreenTopicDetail extends StatelessWidget {
   final Topic _topic;
@@ -25,7 +25,7 @@ class ScreenTopicDetail extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline4,
                   ),
                 ),
-                RatingBoxVertical(topic: _topic),
+                RatingBoxVertical(rating: _topic.rating),
               ],
             ),
             Padding(
@@ -39,7 +39,7 @@ class ScreenTopicDetail extends StatelessWidget {
               indent: 10,
               endIndent: 10,
             ),
-            TopicWidget()
+            RecordingWidget()
           ],
         ),
       ),
