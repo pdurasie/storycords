@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tonband/models/Recording.dart';
 import 'package:tonband/models/Topic.dart';
 import 'package:tonband/ui/components/HomeWelcomeHeader.dart';
 
@@ -14,13 +15,21 @@ class HomeBodyWidget extends StatelessWidget {
   final List<Topic> topics = List.generate(
     8,
     (index) => Topic(
-      title:
-          "Dies ist ein wundervolles, atemberaubendes Topic mit der Nummer $index",
-      author: "mir",
-      description:
-          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. ",
-      rating: index * 12,
-    ),
+        title:
+            "Dies ist ein wundervolles, atemberaubendes Topic mit der Nummer $index",
+        author: "mir",
+        description:
+            "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. ",
+        rating: index * 12,
+        recordings: [
+          Recording(
+            title:
+                "Als ich mich endlich traute, meinen Mitbewohner rauszuschmeißen",
+            author: "Lucia",
+            length: 412,
+            rating: 81,
+          )
+        ]),
   );
 
   HomeBodyWidget({

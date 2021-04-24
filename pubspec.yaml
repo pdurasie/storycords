@@ -27,6 +27,8 @@ dependencies:
   # BLoCs.
   bloc: ^7.0.0
   flutter_bloc: ^7.0.0
+  # Riverpod : Provider and state management in one
+  flutter_riverpod: ^0.14.0+1
   # Library for recording sound.
   record: ^2.1.0+1
   # Get paths to device specific directories.

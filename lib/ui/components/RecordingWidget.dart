@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:tonband/models/Recording.dart';
 import 'package:tonband/style.dart';
 import 'package:tonband/ui/components/VerticalRatingBox.dart';
+import 'package:tonband/util/Formatter.dart';
 
 import '../../style.dart';
 
 class RecordingWidget extends StatelessWidget {
-  const RecordingWidget({Key? key, required Recording recording})
-      : super(key: key);
+  final Recording recording;
+  const RecordingWidget({Key? key, required this.recording}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +19,12 @@ class RecordingWidget extends StatelessWidget {
         child: Row(
           children: [
             //pass the recording down. Should consider provider for this
-            PlayButtonWithTime(),
-            InfoText(),
+            PlayButtonWithTime(
+                timeString: Formatter.toDurationString(
+                    recording.length)), //pass in length
+            InfoText(
+              recording: recording,
+            ),
             RatingBoxVertical(
               rating: 81,
             )
@@ -31,9 +36,12 @@ class RecordingWidget extends StatelessWidget {
 }
 
 class InfoText extends StatelessWidget {
+  final Recording recording;
+
   const InfoText({
+    required this.recording,
     Key? key,
-  }) : super(key: key);
+  }) : super();
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +50,7 @@ class InfoText extends StatelessWidget {
           text: TextSpan(
         children: [
           TextSpan(
-              text:
-                  "Als ich mich endlich traute, meinen Mitbewohner rauszuschmeißen",
+              text: recording.title,
               style: Theme.of(context).textTheme.bodyText1),
           WidgetSpan(
               child: Padding(
@@ -52,7 +59,7 @@ class InfoText extends StatelessWidget {
           )),
           TextSpan(text: "\n"),
           TextSpan(
-              text: "von Lucia vor 2 Jahren",
+              text: "von ${recording.author} vor 2 Jahren",
               style: Theme.of(context).textTheme.caption),
           WidgetSpan(
               child: Padding(
@@ -93,8 +100,10 @@ class RecordingMetaInfoRow extends StatelessWidget {
 }
 
 class PlayButtonWithTime extends StatelessWidget {
+  final String timeString;
   const PlayButtonWithTime({
     Key? key,
+    required this.timeString,
   }) : super(key: key);
 
   @override
@@ -110,7 +119,7 @@ class PlayButtonWithTime extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 2.0),
-            child: Text("8:31"),
+            child: Text(timeString),
           )
         ],
       ),
