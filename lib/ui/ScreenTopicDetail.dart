@@ -12,7 +12,12 @@ class ScreenTopicDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read(topicDetailNotifierProvider.notifier).getRecordings();
+    //modify state asynchronously to avoid bad state of widget in life cycle
+    // https://github.com/rrousselGit/river_pod/issues/177
+    Future.delayed(
+        Duration.zero,
+        () =>
+            context.read(topicDetailNotifierProvider.notifier).getRecordings());
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
