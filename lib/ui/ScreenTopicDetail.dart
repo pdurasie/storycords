@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
-import 'package:tonband/infrastructure/TopicDetailNotifier.dart';
-import 'package:tonband/infrastructure/providers.dart';
+import 'package:tonband/infrastructure/providers/TopicDetailNotifier.dart';
+import 'package:tonband/infrastructure/providers/providers.dart';
 import 'package:tonband/models/Topic.dart';
 import 'package:tonband/ui/components/RecordingWidget.dart';
 
