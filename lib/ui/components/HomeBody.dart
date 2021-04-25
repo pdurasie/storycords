@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tonband/infrastructure/providers/providers.dart';
-import 'package:tonband/models/Topic.dart';
 import 'package:tonband/ui/components/HomeTopicCard.dart';
 import 'package:tonband/ui/components/HomeWelcomeHeader.dart';
 
@@ -42,8 +41,11 @@ class HomeBodyWidget extends StatelessWidget {
                 //for (Topic topic in topics) HomeTopicCard(topic);
                 final responseAsyncValue = watch(topicsProvider);
                 return responseAsyncValue.map(
-                  data: (topics) =>
-                      buildHomeTopicCardList(context, topics.value),
+                  data: (topics) => Column(
+                    children: [
+                      for (var topic in topics.value) HomeTopicCard(topic)
+                    ],
+                  ),
                   loading: (_) => CircularProgressIndicator(),
                   error: (_) => Text(
                     _.error.toString(),
@@ -56,11 +58,5 @@ class HomeBodyWidget extends StatelessWidget {
         ),
       );
     });
-  }
-
-  Widget buildHomeTopicCardList(BuildContext context, List<Topic> topics) {
-    return Column(
-      children: [for (var topic in topics) HomeTopicCard(topic)],
-    );
   }
 }
