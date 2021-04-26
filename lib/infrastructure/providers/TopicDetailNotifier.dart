@@ -1,14 +1,13 @@
 import 'package:riverpod/riverpod.dart';
+import 'package:tonband/infrastructure/TopicRepository.dart';
 import 'package:tonband/models/Recording.dart';
-import 'package:tonband/models/Topic.dart';
 
 abstract class TopicDetailState {
   const TopicDetailState();
 }
 
 class TopicDetailInitial extends TopicDetailState {
-  final Topic topicWithNoRecordings;
-  const TopicDetailInitial(this.topicWithNoRecordings);
+  const TopicDetailInitial();
 }
 
 class TopicDetailLoading extends TopicDetailState {
@@ -16,8 +15,8 @@ class TopicDetailLoading extends TopicDetailState {
 }
 
 class TopicDetailFullyLoaded extends TopicDetailState {
-  final Topic fullTopic;
-  const TopicDetailFullyLoaded(this.fullTopic);
+  final List<Recording> _recordings;
+  const TopicDetailFullyLoaded(this._recordings);
 }
 
 class TopicDetailError extends TopicDetailState {
@@ -25,35 +24,17 @@ class TopicDetailError extends TopicDetailState {
   const TopicDetailError(this.message);
 }
 
+// TODO this class is useless - only used for dummy purposes
 class TopicDetailNotifier extends StateNotifier<TopicDetailState> {
-  Topic _topic = Topic();
-  Topic get topic => _topic;
+  final TopicRepository _topicRepository;
 
-  TopicDetailNotifier()
-      : super(TopicDetailInitial(
-            Topic())); //TODO fetch (partially loaded) Topic from Repo here
+  TopicDetailNotifier(this._topicRepository) : super(TopicDetailInitial());
 
-  void addRecording(Recording recording) {
-    _topic.recordings?.add(recording);
-  }
-
-  Future<void> getRecordings() async {
+  Future<void> getRecordings(int id) async {
     try {
       state = TopicDetailLoading();
-      //TODO load recordings from API, for now: fake request
-      final recordings = await Future.delayed(
-          Duration(seconds: 2),
-          () => [
-                Recording(
-                  title:
-                      "Als ich mich endlich traute, meinen Mitbewohner rauszuschmeißen",
-                  author: "Lucia",
-                  length: 412,
-                  rating: 81,
-                )
-              ]);
-      _topic.recordings = recordings;
-      state = TopicDetailFullyLoaded(_topic);
+      final recordings = await _topicRepository.getRecordingsByTopicId(id);
+      state = TopicDetailFullyLoaded(recordings);
     } on Exception {
       state = TopicDetailError("Failed");
     }

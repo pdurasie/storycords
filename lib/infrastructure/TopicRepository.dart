@@ -27,4 +27,30 @@ class TopicRepository {
                   ]),
             ));
   }
+
+  Future<List<Recording>> getRecordingsByTopicId(int id) async {
+    return Future.delayed(
+        Duration(seconds: 2),
+        () => [
+              Recording(
+                title:
+                    "Als ich mich endlich traute, meinen Mitbewohner rauszuschmeißen",
+                author: "Lucia",
+                length: 412,
+                rating: 81,
+              ),
+              Recording(
+                title: "Ich dachte schon, ich guck nicht richtig",
+                author: "David313",
+                length: 123,
+                rating: 12,
+              ),
+              Recording(
+                title: "Franzbrötchen am Strand",
+                author: "PatDog",
+                length: 425,
+                rating: 1992,
+              )
+            ]);
+  }
 }

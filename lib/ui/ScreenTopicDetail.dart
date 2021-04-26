@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
-import 'package:tonband/infrastructure/providers/TopicDetailNotifier.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tonband/infrastructure/providers/providers.dart';
 import 'package:tonband/models/Topic.dart';
 import 'package:tonband/ui/components/RecordingWidget.dart';
@@ -8,7 +7,8 @@ import 'package:tonband/ui/components/RecordingWidget.dart';
 import 'components/VerticalRatingBox.dart';
 
 class ScreenTopicDetail extends StatelessWidget {
-  const ScreenTopicDetail() : super();
+  final Topic _topic;
+  const ScreenTopicDetail(this._topic) : super();
 
   @override
   Widget build(BuildContext context) {
@@ -16,26 +16,16 @@ class ScreenTopicDetail extends StatelessWidget {
     // https://github.com/rrousselGit/river_pod/issues/177
     Future.delayed(
         Duration.zero,
-        () =>
-            context.read(topicDetailNotifierProvider.notifier).getRecordings());
+        () => context
+            .read(topicDetailNotifierProvider.notifier)
+            .getRecordings(121)); //TODO put in topic real id
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
-        child: Consumer(builder: (context, watch, child) {
-          final state = watch(topicDetailNotifierProvider);
-          if (state is TopicDetailInitial) {
-            return TopicPartiallyLoaded(topic: state.topicWithNoRecordings);
-          } else if (state is TopicDetailLoading) {
-            return CircularProgressIndicator();
-          } else if (state is TopicDetailFullyLoaded) {
-            return TopicFullyLoaded(topic: state.fullTopic);
-          } else {
-            return Center(
-              child: Text("Error occured"),
-            );
-          }
-        }),
+        child: TopicPartiallyLoaded(
+          topic: _topic,
+        ),
       ),
     );
   }
@@ -45,7 +35,7 @@ class TopicFullyLoaded extends StatelessWidget {
   const TopicFullyLoaded({
     Key? key,
     required Topic topic,
-  })   : _topic = topic,
+  })  : _topic = topic,
         super(key: key);
 
   final Topic _topic;
@@ -82,12 +72,12 @@ class TopicFullyLoaded extends StatelessWidget {
   }
 }
 
-//TODO Refactor this
+//TODO Refactor this, as this is a copy of the widget above
 class TopicPartiallyLoaded extends StatelessWidget {
   const TopicPartiallyLoaded({
     Key? key,
     required Topic topic,
-  })   : _topic = topic,
+  })  : _topic = topic,
         super(key: key);
 
   final Topic _topic;
@@ -118,6 +108,44 @@ class TopicPartiallyLoaded extends StatelessWidget {
           indent: 10,
           endIndent: 10,
         ),
+        /*
+        Consumer(builder: (context, watch, child) {
+          final state = watch(topicDetailNotifierProvider);
+          if (state is TopicDetailInitial) {
+            return Center(child: Text("Hi"));
+          } else if (state is TopicDetailLoading) {
+            return CircularProgressIndicator();
+          } else if (state is TopicDetailFullyLoaded) {
+            return ;
+          } else {
+            return Center(
+              child: Text("Error occured"),
+            );
+          }
+        })
+
+         */
+        Consumer(builder: (context, watch, child) {
+          //for (Topic topic in topics) HomeTopicCard(topic);
+          final responseAsyncValue = watch(recordingsProvider);
+          return responseAsyncValue.map(
+            data: (recordings) => SingleChildScrollView(
+              child: Column(
+                children: [
+                  for (var recording in recordings.value)
+                    RecordingWidget(
+                      Krecording: recording,
+                    )
+                ],
+              ),
+            ),
+            loading: (_) => CircularProgressIndicator(),
+            error: (_) => Text(
+              _.error.toString(),
+              style: TextStyle(color: Colors.red),
+            ),
+          );
+        }),
       ],
     );
   }

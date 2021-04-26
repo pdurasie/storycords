@@ -40,8 +40,8 @@ class HomeTopicCard extends StatelessWidget {
           ),
           // The actual card body
           GestureDetector(
-            onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => ScreenTopicDetail())),
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => ScreenTopicDetail(_topic))),
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(_topicCardRadius)),
               child: Container(
