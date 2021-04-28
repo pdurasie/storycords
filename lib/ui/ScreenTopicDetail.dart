@@ -134,7 +134,7 @@ class TopicPartiallyLoaded extends StatelessWidget {
                 children: [
                   for (var recording in recordings.value)
                     RecordingWidget(
-                      Krecording: recording,
+                      recording: recording,
                     )
                 ],
               ),
