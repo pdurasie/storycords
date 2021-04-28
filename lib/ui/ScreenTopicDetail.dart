@@ -31,48 +31,6 @@ class ScreenTopicDetail extends StatelessWidget {
   }
 }
 
-class TopicFullyLoaded extends StatelessWidget {
-  const TopicFullyLoaded({
-    Key? key,
-    required Topic topic,
-  })  : _topic = topic,
-        super(key: key);
-
-  final Topic _topic;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: Text(
-                _topic.title,
-                style: Theme.of(context).textTheme.headline4,
-              ),
-            ),
-            RatingBoxVertical(rating: _topic.rating),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 24.0),
-          child: Text(_topic.description),
-        ),
-        Divider(
-          color: Colors.grey,
-          height: 20,
-          thickness: 1,
-          indent: 10,
-          endIndent: 10,
-        ),
-        RecordingWidget(recording: _topic.recordings![0])
-      ],
-    );
-  }
-}
-
-//TODO Refactor this, as this is a copy of the widget above
 class TopicPartiallyLoaded extends StatelessWidget {
   const TopicPartiallyLoaded({
     Key? key,
@@ -108,28 +66,10 @@ class TopicPartiallyLoaded extends StatelessWidget {
           indent: 10,
           endIndent: 10,
         ),
-        /*
         Consumer(builder: (context, watch, child) {
-          final state = watch(topicDetailNotifierProvider);
-          if (state is TopicDetailInitial) {
-            return Center(child: Text("Hi"));
-          } else if (state is TopicDetailLoading) {
-            return CircularProgressIndicator();
-          } else if (state is TopicDetailFullyLoaded) {
-            return ;
-          } else {
-            return Center(
-              child: Text("Error occured"),
-            );
-          }
-        })
-
-         */
-        Consumer(builder: (context, watch, child) {
-          //for (Topic topic in topics) HomeTopicCard(topic);
           final responseAsyncValue = watch(recordingsProvider);
           return responseAsyncValue.map(
-            data: (recordings) => SingleChildScrollView(
+            data: (recordings) => Expanded(
               child: Column(
                 children: [
                   for (var recording in recordings.value)
