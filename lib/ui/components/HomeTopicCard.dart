@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tonband/models/Topic.dart';
 import 'package:tonband/ui/ScreenTopicDetail.dart';
+import 'package:tonband/ui/components/CardWidgetWithShadow.dart';
 
-import '../../style.dart';
 import 'VerticalRatingBox.dart';
 
 const _topicCardRadius = 20.0;
@@ -14,51 +14,28 @@ class HomeTopicCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(paddingDefault),
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
       child: SizedBox(
         height: 120,
         width: MediaQuery.of(context).size.width,
-        //Beware: Incredible workaround for adding shadow around the card.
-        //You need to put a container under your ClipRRect via stack that
-        //receives the shadow, but you also need to wrap the content
-        // of the ClipRRect with a container with white background, so that
-        // the shadow of your underlying container doesn't shine through.
-        child: Stack(children: [
-          // Dummy container for shadow
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(_topicCardRadius),
-              ),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    offset: Offset(2, 2),
-                    blurRadius: 5.0),
-              ],
-            ),
-          ),
-          // The actual card body
-          GestureDetector(
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => ScreenTopicDetail(_topic))),
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(_topicCardRadius)),
-              child: Container(
-                color: Colors.white,
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: TextDataContainer(_topic),
-                    ),
-                    RatingBoxVertical(rating: _topic.rating)
-                  ],
-                ),
+        child: GestureDetector(
+          onTap: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ScreenTopicDetail(_topic))),
+          child: CardWidgetWithShadow(
+            child: Container(
+              color: Colors.white,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: TextDataContainer(_topic),
+                  ),
+                  RatingBoxVertical(rating: _topic.rating)
+                ],
               ),
             ),
           ),
-        ]),
+        ),
       ),
     );
   }

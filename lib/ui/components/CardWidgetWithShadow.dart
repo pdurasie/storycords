@@ -11,7 +11,7 @@ class CardWidgetWithShadow extends StatelessWidget {
     return Material(
       borderRadius: BorderRadius.all(Radius.circular(12.0)),
       clipBehavior: Clip.antiAlias,
-      elevation: 5,
+      elevation: 4,
       child: child,
     );
   }
