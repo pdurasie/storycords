@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tonband/models/Recording.dart';
 import 'package:tonband/style.dart';
+import 'package:tonband/ui/components/CardWidgetWithShadow.dart';
 import 'package:tonband/ui/components/VerticalRatingBox.dart';
 import 'package:tonband/util/Formatter.dart';
 
@@ -14,10 +15,7 @@ class RecordingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Material(
-        borderRadius: BorderRadius.all(Radius.circular(12.0)),
-        clipBehavior: Clip.antiAlias,
-        elevation: 5,
+      child: CardWidgetWithShadow(
         child: Row(
           children: [
             //pass the recording down. Should consider provider for this
