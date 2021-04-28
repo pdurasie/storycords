@@ -21,11 +21,8 @@ class ScreenTopicDetail extends StatelessWidget {
             .getRecordings(121)); //TODO put in topic real id
     return Scaffold(
       appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
-        child: TopicPartiallyLoaded(
-          topic: _topic,
-        ),
+      body: TopicPartiallyLoaded(
+        topic: _topic,
       ),
     );
   }
@@ -42,51 +39,60 @@ class TopicPartiallyLoaded extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: Text(
-                _topic.title,
-                style: Theme.of(context).textTheme.headline4,
-              ),
-            ),
-            RatingBoxVertical(rating: _topic.rating),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 24.0),
-          child: Text(_topic.description),
-        ),
-        Divider(
-          color: Colors.grey,
-          height: 20,
-          thickness: 1,
-          indent: 10,
-          endIndent: 10,
-        ),
-        Consumer(builder: (context, watch, child) {
-          final responseAsyncValue = watch(recordingsProvider);
-          return responseAsyncValue.map(
-            data: (recordings) => Expanded(
-              child: Column(
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            children: [
+              Row(
                 children: [
-                  for (var recording in recordings.value)
-                    RecordingWidget(
-                      recording: recording,
-                    )
+                  Expanded(
+                    child: Text(
+                      _topic.title,
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                  ),
+                  RatingBoxVertical(rating: _topic.rating),
                 ],
               ),
-            ),
-            loading: (_) => CircularProgressIndicator(),
-            error: (_) => Text(
-              _.error.toString(),
-              style: TextStyle(color: Colors.red),
-            ),
-          );
-        }),
-      ],
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 24.0),
+                child: Text(_topic.description),
+              ),
+              Divider(
+                color: Colors.grey,
+                height: 20,
+                thickness: 1,
+                indent: 10,
+                endIndent: 10,
+              ),
+              Consumer(builder: (context, watch, child) {
+                final responseAsyncValue = watch(recordingsProvider);
+                return responseAsyncValue.map(
+                  data: (recordings) => Expanded(
+                    child: Column(
+                      children: [
+                        for (var recording in recordings.value)
+                          RecordingWidget(
+                            recording: recording,
+                          )
+                      ],
+                    ),
+                  ),
+                  loading: (_) => CircularProgressIndicator(),
+                  error: (_) => Text(
+                    _.error.toString(),
+                    style: TextStyle(color: Colors.red),
+                  ),
+                );
+              }),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
