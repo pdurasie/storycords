@@ -15,7 +15,6 @@ class HomeBodyWidget extends StatelessWidget {
   HomeBodyWidget({
     Key? key,
   }) : super(key: key);
-//top: MediaQuery.of(context).size.height * _bodyTopOffsetMultiplier,
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
@@ -38,7 +37,6 @@ class HomeBodyWidget extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * _bodyOffset),
               HomeCategoryTitle("Gerade beliebt"),
               Consumer(builder: (context, watch, child) {
-                //for (Topic topic in topics) HomeTopicCard(topic);
                 final responseAsyncValue = watch(topicsProvider);
                 return responseAsyncValue.map(
                   data: (topics) => Column(

@@ -14,24 +14,23 @@ class RecordingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: ClipRRect(
+      child: Material(
         borderRadius: BorderRadius.all(Radius.circular(12.0)),
-        child: Container(
-          color: Colors.white,
-          child: Row(
-            children: [
-              //pass the recording down. Should consider provider for this
-              PlayButtonWithTime(
-                  timeString: Formatter.toDurationString(
-                      recording.length)), //pass in length
-              InfoText(
-                recording: recording,
-              ),
-              RatingBoxVertical(
-                rating: 81,
-              )
-            ],
-          ),
+        clipBehavior: Clip.antiAlias,
+        elevation: 5,
+        child: Row(
+          children: [
+            //pass the recording down. Should consider provider for this
+            PlayButtonWithTime(
+                timeString: Formatter.toDurationString(
+                    recording.length)), //pass in length
+            InfoText(
+              recording: recording,
+            ),
+            RatingBoxVertical(
+              rating: 81,
+            )
+          ],
         ),
       ),
     );
