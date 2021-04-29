@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tonband/models/Topic.dart';
 import 'package:tonband/ui/ScreenTopicDetail.dart';
 import 'package:tonband/ui/components/CardWidgetWithShadow.dart';
+import 'package:tonband/util/Formatter.dart';
 
 import 'VerticalRatingBox.dart';
 
@@ -30,7 +31,8 @@ class HomeTopicCard extends StatelessWidget {
                     flex: 2,
                     child: TextDataContainer(_topic),
                   ),
-                  RatingBoxVertical(rating: _topic.rating)
+                  RatingBoxVertical(
+                      upvotes: _topic.rating.upvotes.toRatingString())
                 ],
               ),
             ),

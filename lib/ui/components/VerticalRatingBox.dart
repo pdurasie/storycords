@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class RatingBoxVertical extends StatelessWidget {
   const RatingBoxVertical({
     Key? key,
-    required int rating,
-  })   : _rating = rating,
+    required String upvotes,
+  })  : _rating = upvotes,
         super(key: key);
 
-  final int _rating;
+  final String _rating;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class RatingBoxVertical extends StatelessWidget {
             onPressed: () {},
           ),
           Text(
-            _rating.toString(),
+            _rating,
             textAlign: TextAlign.left,
           ),
           IconButton(

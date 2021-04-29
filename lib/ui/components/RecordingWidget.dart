@@ -18,15 +18,12 @@ class RecordingWidget extends StatelessWidget {
       child: CardWidgetWithShadow(
         child: Row(
           children: [
-            //pass the recording down. Should consider provider for this
-            PlayButtonWithTime(
-                timeString: Formatter.toDurationString(
-                    recording.length)), //pass in length
+            PlayButtonWithTime(timeString: recording.length.toDurationString()),
             InfoText(
               recording: recording,
             ),
             RatingBoxVertical(
-              rating: 81,
+              upvotes: recording.rating.upvotes.toRatingString(),
             )
           ],
         ),

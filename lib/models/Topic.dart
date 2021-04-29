@@ -16,6 +16,7 @@ class Topic {
     this.title = "",
     this.author = "",
     this.description = "",
+    required this.rating,
     this.recordings,
   }) : super();
 }

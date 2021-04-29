@@ -1,3 +1,4 @@
+import 'package:tonband/models/Rating.dart';
 import 'package:tonband/models/Recording.dart';
 import 'package:tonband/models/Topic.dart';
 
@@ -15,14 +16,14 @@ class TopicRepository {
                   author: "mir",
                   description:
                       "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. ",
-                  rating: index * 12,
+                  rating: Rating(index * 12),
                   recordings: [
                     Recording(
                       title:
                           "Als ich mich endlich traute, meinen Mitbewohner rauszuschmeißen",
                       author: "Lucia",
                       length: 412,
-                      rating: 81,
+                      rating: Rating(index * 41),
                     )
                   ]),
             ));
@@ -37,19 +38,19 @@ class TopicRepository {
                     "Als ich mich endlich traute, meinen Mitbewohner rauszuschmeißen",
                 author: "Lucia",
                 length: 412,
-                rating: 81,
+                rating: Rating(91),
               ),
               Recording(
-                title: "Ich dachte schon, ich guck nicht richtig",
+                title: "Ich dachte schon, ich guck nicht richtig!",
                 author: "David313",
                 length: 123,
-                rating: 12,
+                rating: Rating(31),
               ),
               Recording(
                 title: "Franzbrötchen am Strand",
                 author: "PatDog",
                 length: 425,
-                rating: 1992,
+                rating: Rating(1991),
               )
             ]);
   }
