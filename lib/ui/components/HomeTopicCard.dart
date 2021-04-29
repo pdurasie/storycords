@@ -17,22 +17,17 @@ class HomeTopicCard extends StatelessWidget {
       child: SizedBox(
         height: 120,
         width: MediaQuery.of(context).size.width,
-        child: GestureDetector(
+        child: CardWidgetWithShadowAndInkwell(
           onTap: () => Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => ScreenTopicDetail(_topic))),
-          child: CardWidgetWithShadowAndInkwell(
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => ScreenTopicDetail(_topic))),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: TextDataContainer(_topic),
-                ),
-                RatingBoxVertical(
-                    upvotes: _topic.rating.upvotes.toRatingString())
-              ],
-            ),
+          child: Row(
+            children: [
+              Expanded(
+                flex: 2,
+                child: TextDataContainer(_topic),
+              ),
+              RatingBoxVertical(upvotes: _topic.rating.upvotes.toRatingString())
+            ],
           ),
         ),
       ),
