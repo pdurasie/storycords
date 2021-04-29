@@ -6,8 +6,6 @@ import 'package:tonband/util/Formatter.dart';
 
 import 'VerticalRatingBox.dart';
 
-const _topicCardRadius = 20.0;
-
 class HomeTopicCard extends StatelessWidget {
   final Topic _topic;
   const HomeTopicCard(this._topic) : super();
@@ -42,44 +40,6 @@ class HomeTopicCard extends StatelessWidget {
     );
   }
 }
-
-/*
-class TopicCardImage extends StatelessWidget {
-  const TopicCardImage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      flex: 1,
-      child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-                topRight: Radius.circular(_cordCardRadius),
-                bottomRight: Radius.circular(_cordCardRadius)),
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Colors.lightBlueAccent,
-                  Colors.blue,
-                ])),
-        child: Center(
-            child: IconButton(
-          icon: Icon(
-            Icons.play_circle_outline,
-            color: Colors.white,
-          ),
-          iconSize: 50,
-          onPressed: () {},
-        )),
-      ),
-    );
-  }
-}
-
- */
 
 class TextDataContainer extends StatelessWidget {
   final Topic _topic;
@@ -118,16 +78,12 @@ class TextDataContainer extends StatelessWidget {
         text: TextSpan(children: [
       TextSpan(
           text: _topic.recordings?.length.toString(),
-          style: Theme.of(context).textTheme.caption),
+          style: Theme.of(context).textTheme.caption?.copyWith(fontSize: 16)),
       WidgetSpan(
-          child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 2),
+          child: Icon(
+        Icons.mic_none,
+        size: 16,
       )),
-      WidgetSpan(
-          child: Image.asset(
-        'asset/images/button_icon_58.png',
-        scale: 2.5,
-      ))
     ]));
   }
 }
