@@ -15,7 +15,8 @@ class RecordingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: CardWidgetWithShadow(
+      child: CardWidgetWithShadowAndInkwell(
+        onTap: () => null,
         child: Row(
           children: [
             PlayButtonWithTime(timeString: recording.length.toDurationString()),

@@ -20,19 +20,18 @@ class HomeTopicCard extends StatelessWidget {
         child: GestureDetector(
           onTap: () => Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => ScreenTopicDetail(_topic))),
-          child: CardWidgetWithShadow(
-            child: Container(
-              color: Colors.white,
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: TextDataContainer(_topic),
-                  ),
-                  RatingBoxVertical(
-                      upvotes: _topic.rating.upvotes.toRatingString())
-                ],
-              ),
+          child: CardWidgetWithShadowAndInkwell(
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => ScreenTopicDetail(_topic))),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: TextDataContainer(_topic),
+                ),
+                RatingBoxVertical(
+                    upvotes: _topic.rating.upvotes.toRatingString())
+              ],
             ),
           ),
         ),

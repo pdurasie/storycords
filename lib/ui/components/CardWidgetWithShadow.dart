@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class CardWidgetWithShadow extends StatelessWidget {
-  final child;
+import '../../style.dart';
 
-  CardWidgetWithShadow({required this.child});
+class CardWidgetWithShadowAndInkwell extends StatelessWidget {
+  final child;
+  final onTap;
+  CardWidgetWithShadowAndInkwell({required this.child, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,11 @@ class CardWidgetWithShadow extends StatelessWidget {
       borderRadius: BorderRadius.all(Radius.circular(12.0)),
       clipBehavior: Clip.antiAlias,
       elevation: 4,
-      child: child,
+      child: InkWell(
+        splashColor: colorPrimary,
+        onTap: onTap,
+        child: child,
+      ),
     );
   }
 }
