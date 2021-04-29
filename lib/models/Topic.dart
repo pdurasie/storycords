@@ -1,22 +1,19 @@
-import 'package:tonband/models/Recording.dart';
-
 import 'Rating.dart';
 
 class Topic {
   String title = "";
   String author = "";
   String description = "";
-  String asd = "";
 
   Rating rating = Rating(0);
 
-  List<Recording>? recordings;
+  int recordingsAmount;
 
   Topic({
     this.title = "",
     this.author = "",
     this.description = "",
     required this.rating,
-    this.recordings,
+    this.recordingsAmount = 0,
   }) : super();
 }
