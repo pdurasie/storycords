@@ -50,7 +50,7 @@ class TopicRepository {
                 title: "Franzbrötchen am Strand",
                 author: "PatDog",
                 length: 425,
-                rating: Rating(1991),
+                rating: Rating(19911),
               )
             ]);
   }

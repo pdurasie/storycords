@@ -44,7 +44,7 @@ class HomeBodyWidget extends StatelessWidget {
                       for (var topic in topics.value) HomeTopicCard(topic)
                     ],
                   ),
-                  loading: (_) => CircularProgressIndicator(),
+                  loading: (_) => Center(child: CircularProgressIndicator()),
                   error: (_) => Text(
                     _.error.toString(),
                     style: TextStyle(color: Colors.red),
