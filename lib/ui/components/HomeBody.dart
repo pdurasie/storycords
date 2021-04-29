@@ -24,34 +24,34 @@ class HomeBodyWidget extends StatelessWidget {
             // add top margin to have only slight overlap to the header
             top: MediaQuery.of(context).size.height * _bodyTopOffsetMultiplier,
           ),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(60), topRight: Radius.circular(60)),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              //this container makes sure everything is below the circular main card radius
-              Container(
-                  height: MediaQuery.of(context).size.height * _bodyOffset),
-              HomeCategoryTitle("Gerade beliebt"),
-              Consumer(builder: (context, watch, child) {
-                final responseAsyncValue = watch(topicsProvider);
-                return responseAsyncValue.map(
-                  data: (topics) => Column(
-                    children: [
-                      for (var topic in topics.value) HomeTopicCard(topic)
-                    ],
-                  ),
-                  loading: (_) => Center(child: CircularProgressIndicator()),
-                  error: (_) => Text(
-                    _.error.toString(),
-                    style: TextStyle(color: Colors.red),
-                  ),
-                );
-              }),
-            ],
+          child: Material(
+            elevation: 20,
+            borderRadius: BorderRadius.all(Radius.circular(60.0)),
+            clipBehavior: Clip.antiAlias,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //this container makes sure everything is below the circular main card radius
+                Container(
+                    height: MediaQuery.of(context).size.height * _bodyOffset),
+                HomeCategoryTitle("Gerade beliebt"),
+                Consumer(builder: (context, watch, child) {
+                  final responseAsyncValue = watch(topicsProvider);
+                  return responseAsyncValue.map(
+                    data: (topics) => Column(
+                      children: [
+                        for (var topic in topics.value) HomeTopicCard(topic)
+                      ],
+                    ),
+                    loading: (_) => Center(child: CircularProgressIndicator()),
+                    error: (_) => Text(
+                      _.error.toString(),
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  );
+                }),
+              ],
+            ),
           ),
         ),
       );
