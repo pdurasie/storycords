@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tonband/models/Topic.dart';
 import 'package:tonband/ui/ScreenTopicDetail.dart';
 import 'package:tonband/ui/components/CardWidgetWithShadow.dart';
-import 'package:tonband/util/Formatter.dart';
 
 import 'VerticalRatingBox.dart';
 
-class HomeTopicCard extends StatelessWidget {
+class HomeTopicCard extends ConsumerWidget {
   final Topic _topic;
   const HomeTopicCard(this._topic) : super();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
       child: SizedBox(
@@ -26,12 +26,22 @@ class HomeTopicCard extends StatelessWidget {
                 flex: 2,
                 child: TextDataContainer(_topic),
               ),
-              RatingBoxVertical(upvotes: _topic.rating.upvotes.toRatingString())
+              RatingBoxVertical(
+                rateable: _topic,
+              )
             ],
           ),
         ),
       ),
     );
+  }
+
+  @override
+  void downvote() {}
+
+  @override
+  void upvote() {
+    // TODO: implement upvote
   }
 }
 

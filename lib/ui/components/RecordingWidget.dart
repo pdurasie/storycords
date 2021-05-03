@@ -24,7 +24,7 @@ class RecordingWidget extends StatelessWidget {
               recording: recording,
             ),
             RatingBoxVertical(
-              upvotes: recording.rating.upvotes.toRatingString(),
+              rateable: recording,
             )
           ],
         ),

@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tonband/infrastructure/providers/providers.dart';
 import 'package:tonband/models/Topic.dart';
 import 'package:tonband/ui/components/RecordingWidget.dart';
-import 'package:tonband/util/Formatter.dart';
 
 import 'components/VerticalRatingBox.dart';
 
@@ -56,8 +55,7 @@ class TopicPartiallyLoaded extends StatelessWidget {
                       style: Theme.of(context).textTheme.headline4,
                     ),
                   ),
-                  RatingBoxVertical(
-                      upvotes: _topic.rating.upvotes.toRatingString()),
+                  RatingBoxVertical(rateable: _topic),
                 ],
               ),
               Padding(

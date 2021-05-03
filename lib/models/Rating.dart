@@ -1,6 +1,8 @@
-class Rating {
+import 'package:flutter/material.dart';
+
+class Rating extends ChangeNotifier {
   int get total {
-    return upvotes + downvotes;
+    return upvotes - downvotes;
   }
 
   int upvotes = 0;
