@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tonband/models/Topic.dart';
 import 'package:tonband/ui/ScreenTopicDetail.dart';
 import 'package:tonband/ui/components/CardWidgetWithShadow.dart';
 
 import 'VerticalRatingBox.dart';
 
-class HomeTopicCard extends ConsumerWidget {
+class HomeTopicCard extends StatelessWidget {
   final Topic _topic;
   const HomeTopicCard(this._topic) : super();
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
       child: SizedBox(
