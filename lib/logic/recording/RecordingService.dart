@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
-import 'package:tonband/logic/permission/PermissionService.dart';
 
 /// This class is responsible for capturing sound.
 ///
@@ -12,7 +11,7 @@ class RecordingService {
     //TODO I have to test the Permissioning again because of rationaling
     // TODO implement more logic for sound effect injection?
     // TODO implement running timer
-    await PermissionService.ensurePermission(PermissionType.Microphone);
+    // await PermissionService.ensurePermission(PermissionType.Microphone);
     // TODO: only available on Android
     Directory tempDir = (await getExternalStorageDirectory())!;
     String tempPath = tempDir.path;
