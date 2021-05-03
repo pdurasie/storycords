@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tonband/infrastructure/providers/providers.dart';
 import 'package:tonband/models/Topic.dart';
+import 'package:tonband/style.dart';
 import 'package:tonband/ui/components/RecordingWidget.dart';
 
 import 'components/VerticalRatingBox.dart';
@@ -42,9 +43,10 @@ class TopicPartiallyLoaded extends StatelessWidget {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
-        child: SizedBox(
+        child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
+          color: colorGreyBackground,
           child: Column(
             children: [
               Row(
