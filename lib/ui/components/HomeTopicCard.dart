@@ -35,14 +35,6 @@ class HomeTopicCard extends ConsumerWidget {
       ),
     );
   }
-
-  @override
-  void downvote() {}
-
-  @override
-  void upvote() {
-    // TODO: implement upvote
-  }
 }
 
 class TextDataContainer extends StatelessWidget {
