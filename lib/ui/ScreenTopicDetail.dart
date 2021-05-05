@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tonband/infrastructure/providers/providers.dart';
 import 'package:tonband/models/Topic.dart';
 import 'package:tonband/style.dart';
-import 'package:tonband/ui/components/RecordingWidget.dart';
 
+import 'components/RecordingWidget.dart';
 import 'components/VerticalRatingBox.dart';
 
 class ScreenTopicDetail extends StatelessWidget {
@@ -75,14 +75,13 @@ class TopicPartiallyLoaded extends StatelessWidget {
                 final responseAsyncValue = watch(recordingsProvider);
                 return responseAsyncValue.map(
                   data: (recordings) => Expanded(
-                    child: Column(
-                      children: [
-                        for (var recording in recordings.value)
-                          RecordingWidget(
-                            recording: recording,
-                          )
-                      ],
-                    ),
+                    child: ListView.builder(
+                        itemCount: recordings.value.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return RecordingWidget(
+                            recording: recordings.value.elementAt(index),
+                          );
+                        }),
                   ),
                   loading: (_) => CircularProgressIndicator(),
                   error: (_) => Text(

@@ -13,7 +13,7 @@ class CardWidgetWithShadowAndInkwell extends StatelessWidget {
     return Material(
       borderRadius: BorderRadius.all(Radius.circular(12.0)),
       clipBehavior: Clip.antiAlias,
-      elevation: 4,
+      elevation: 2,
       child: InkWell(
         splashColor: colorPrimary,
         onTap: onTap,

@@ -16,7 +16,7 @@ class RecordingWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: CardWidgetWithShadowAndInkwell(
-        onTap: () => null,
+        onTap: () => _showBottomModal(), //set state clicked -> statenotifier?
         child: Row(
           children: [
             PlayButtonWithTime(timeString: recording.length.toDurationString()),
@@ -31,6 +31,25 @@ class RecordingWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _showBottomModal() {
+  return SizedBox.expand(
+    child: DraggableScrollableSheet(
+      builder: (BuildContext context, ScrollController scrollController) {
+        return Container(
+          color: Colors.blue[100],
+          child: ListView.builder(
+            controller: scrollController,
+            itemCount: 25,
+            itemBuilder: (BuildContext context, int index) {
+              return ListTile(title: Text('Item $index'));
+            },
+          ),
+        );
+      },
+    ),
+  );
 }
 
 class InfoText extends StatelessWidget {
