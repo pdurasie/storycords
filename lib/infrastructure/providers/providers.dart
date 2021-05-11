@@ -21,3 +21,5 @@ final recordingsProvider = FutureProvider<List<Recording>>((ref) async {
   return topicRepo.getRecordingsByTopicId(
       21); //TODO put in actual topic id, caches all the time otherwise
 });
+
+final playingRecordingProvider = StateProvider<Recording?>((ref) => null);

@@ -7,12 +7,12 @@ import 'package:tonband/style.dart';
 import 'components/RecordingWidget.dart';
 import 'components/VerticalRatingBox.dart';
 
-class ScreenTopicDetail extends StatelessWidget {
+class ScreenTopicDetail extends ConsumerWidget {
   final Topic _topic;
   const ScreenTopicDetail(this._topic) : super();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
     //modify state asynchronously to avoid bad state of widget in life cycle
     // https://github.com/rrousselGit/river_pod/issues/177
     Future.delayed(
@@ -20,12 +20,18 @@ class ScreenTopicDetail extends StatelessWidget {
         () => context
             .read(topicDetailNotifierProvider.notifier)
             .getRecordings(121)); //TODO put in topic real id
-    return Scaffold(
-      appBar: AppBar(),
-      body: TopicPartiallyLoaded(
-        topic: _topic,
-      ),
-    );
+    final playingRecording = watch(playingRecordingProvider);
+    return ProviderListener(
+        onChange: (context, state) {
+          _showBottomModal(); //TODO make this work
+        },
+        provider: playingRecordingProvider,
+        child: Scaffold(
+          appBar: AppBar(),
+          body: TopicDetailBody(
+            topic: _topic,
+          ),
+        ));
   }
 }
 
