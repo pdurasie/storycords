@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tonband/infrastructure/providers/providers.dart';
+import 'package:tonband/models/Recording.dart';
 import 'package:tonband/models/Topic.dart';
 import 'package:tonband/style.dart';
 
@@ -23,7 +24,7 @@ class ScreenTopicDetail extends ConsumerWidget {
     final playingRecording = watch(playingRecordingProvider);
     return ProviderListener(
         onChange: (context, state) {
-          _showBottomModal(); //TODO make this work
+          _showBottomModal();
         },
         provider: playingRecordingProvider,
         child: Scaffold(
