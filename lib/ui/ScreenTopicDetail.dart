@@ -28,7 +28,13 @@ class ScreenTopicDetail extends ConsumerWidget {
         },
         provider: playingRecordingProvider,
         child: Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            title: Text(
+              _topic.title,
+              style:
+                  Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 18),
+            ),
+          ),
           body: TopicDetailBody(
             topic: _topic,
           ),

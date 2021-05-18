@@ -83,7 +83,10 @@ class InfoText extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 4.0),
             child: Container(),
           )),
-          WidgetSpan(child: RecordingMetaInfoRow())
+          WidgetSpan(
+              child: RecordingMetaInfoRow(
+            recording: recording,
+          ))
         ],
       )),
     );
@@ -91,7 +94,10 @@ class InfoText extends StatelessWidget {
 }
 
 class RecordingMetaInfoRow extends StatelessWidget {
+  final Recording recording;
+
   const RecordingMetaInfoRow({
+    required this.recording,
     Key? key,
   }) : super(key: key);
 
@@ -107,7 +113,7 @@ class RecordingMetaInfoRow extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 4.0),
           child: Text(
-            "41",
+            recording.comments?.length.toString() ?? "0",
             style: TextStyle(color: Colors.grey, fontSize: 12),
           ),
         ),

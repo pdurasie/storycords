@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:tonband/models/Rateable.dart';
 
+import 'Comment.dart';
 import 'Rating.dart';
 
 class Recording implements Rateable {
@@ -13,7 +14,7 @@ class Recording implements Rateable {
   @override
   Rating rating;
   //DateTime datePosted;
-  //List<Comment>
+  List<Comment>? comments;
 
   Recording(
       {this.title = "",
@@ -21,7 +22,8 @@ class Recording implements Rateable {
       this.length = 0,
       required this.rating,
       this.isUpvoted = false,
-      this.isDownvoted = false})
+      this.isDownvoted = false,
+      required this.comments})
       : super();
 
   @override

@@ -26,24 +26,24 @@ class TopicRepository {
         Duration(seconds: 2),
         () => [
               Recording(
-                title:
-                    "Als ich mich endlich traute, meinen Mitbewohner rauszuschmeißen",
-                author: "Lucia",
-                length: 412,
-                rating: Rating(91),
-              ),
+                  title:
+                      "Als ich mich endlich traute, meinen Mitbewohner rauszuschmeißen",
+                  author: "Lucia",
+                  length: 412,
+                  rating: Rating(91),
+                  comments: null),
               Recording(
-                title: "Ich dachte schon, ich guck nicht richtig!",
-                author: "David313",
-                length: 123,
-                rating: Rating(31),
-              ),
+                  title: "Ich dachte schon, ich guck nicht richtig!",
+                  author: "David313",
+                  length: 123,
+                  rating: Rating(31),
+                  comments: null),
               Recording(
-                title: "Franzbrötchen am Strand",
-                author: "PatDog",
-                length: 425,
-                rating: Rating(19911),
-              )
+                  title: "Franzbrötchen am Strand",
+                  author: "PatDog",
+                  length: 425,
+                  rating: Rating(19911),
+                  comments: null)
             ]);
   }
 }
