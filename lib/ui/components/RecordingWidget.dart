@@ -9,14 +9,17 @@ import '../../style.dart';
 
 class RecordingWidget extends StatelessWidget {
   final Recording recording;
-  const RecordingWidget({Key? key, required this.recording}) : super(key: key);
+  final GestureTapCallback? onTap;
+  const RecordingWidget(
+      {Key? key, required this.recording, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: CardWidgetWithShadowAndInkwell(
-        onTap: () => _showBottomModal(), //set state clicked -> statenotifier?
+        onTap: onTap,
         child: Row(
           children: [
             PlayButtonWithTime(timeString: recording.length.toDurationString()),
@@ -31,25 +34,6 @@ class RecordingWidget extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget _showBottomModal() {
-  return SizedBox.expand(
-    child: DraggableScrollableSheet(
-      builder: (BuildContext context, ScrollController scrollController) {
-        return Container(
-          color: Colors.blue[100],
-          child: ListView.builder(
-            controller: scrollController,
-            itemCount: 25,
-            itemBuilder: (BuildContext context, int index) {
-              return ListTile(title: Text('Item $index'));
-            },
-          ),
-        );
-      },
-    ),
-  );
 }
 
 class InfoText extends StatelessWidget {

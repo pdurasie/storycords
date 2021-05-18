@@ -42,8 +42,8 @@ class ScreenTopicDetail extends ConsumerWidget {
   }
 }
 
-class TopicPartiallyLoaded extends StatelessWidget {
-  const TopicPartiallyLoaded({
+class TopicDetailBody extends StatelessWidget {
+  const TopicDetailBody({
     Key? key,
     required Topic topic,
   })  : _topic = topic,
@@ -54,61 +54,110 @@ class TopicPartiallyLoaded extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          color: colorGreyBackground,
+      child: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        color: colorGreyBackground,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
           child: Column(
             children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      _topic.title,
-                      style: Theme.of(context).textTheme.headline4,
-                    ),
-                  ),
-                  RatingBoxVertical(rateable: _topic),
-                ],
+              TopicHeader(
+                topic: _topic,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 24.0),
-                child: Text(_topic.description),
-              ),
-              Divider(
-                color: Colors.grey,
-                height: 20,
-                thickness: 1,
-                indent: 10,
-                endIndent: 10,
-              ),
-              Consumer(builder: (context, watch, child) {
-                final responseAsyncValue = watch(recordingsProvider);
-                return responseAsyncValue.map(
-                  data: (recordings) => Expanded(
-                    child: ListView.builder(
-                        itemCount: recordings.value.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return RecordingWidget(
-                            recording: recordings.value.elementAt(index),
-                          );
-                        }),
-                  ),
-                  loading: (_) => CircularProgressIndicator(),
-                  error: (_) => Text(
-                    _.error.toString(),
-                    style: TextStyle(color: Colors.red),
-                  ),
-                );
-              }),
+              TopicTonbandOverview(),
             ],
           ),
         ),
       ),
     );
   }
+}
+
+class TopicTonbandOverview extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, ScopedReader watch) {
+    final responseAsyncValue = watch(recordingsProvider);
+    return responseAsyncValue.map(
+      data: (recordings) => Expanded(
+        child: ListView.builder(
+            itemCount: recordings.value.length,
+            itemBuilder: (BuildContext context, int index) {
+              return RecordingWidget(
+                  recording: recordings.value.elementAt(index),
+                  onTap: () => changePlayingRecording(
+                      context, recordings.value.elementAt(index)));
+            }),
+      ),
+      loading: (_) => CircularProgressIndicator(),
+      error: (_) => Text(
+        _.error.toString(),
+        style: TextStyle(color: Colors.red),
+      ),
+    );
+  }
+}
+
+void changePlayingRecording(BuildContext context, Recording recording) {
+  context.read(playingRecordingProvider).state = recording;
+}
+
+class TopicHeader extends StatelessWidget {
+  const TopicHeader({
+    Key? key,
+    required this.topic,
+  }) : super(key: key);
+
+  final Topic topic;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                topic.title,
+                style: Theme.of(context).textTheme.headline4,
+              ),
+            ),
+            RatingBoxVertical(rateable: topic),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 24.0),
+          child: Text(topic.description),
+        ),
+        Divider(
+          color: Colors.grey,
+          height: 20,
+          thickness: 1,
+          indent: 10,
+          endIndent: 10,
+        ),
+      ],
+    );
+  }
+}
+
+Widget _showBottomModal() {
+  return SizedBox.expand(
+    child: DraggableScrollableSheet(
+      builder: (BuildContext context, ScrollController scrollController) {
+        return Container(
+          color: Colors.blue[100],
+          child: ListView.builder(
+            controller: scrollController,
+            itemCount: 25,
+            itemBuilder: (BuildContext context, int index) {
+              return ListTile(title: Text('Item $index'));
+            },
+          ),
+        );
+      },
+    ),
+  );
 }
 
 /*
