@@ -32,7 +32,7 @@ class ScreenTopicDetail extends ConsumerWidget {
             title: Text(
               _topic.title,
               style:
-                  Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 18),
+                  Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 16),
             ),
           ),
           body: TopicDetailBody(
