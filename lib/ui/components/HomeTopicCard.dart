@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tonband/models/Topic.dart';
-import 'package:tonband/ui/ScreenTopicDetail.dart';
 import 'package:tonband/ui/components/CardWidgetWithShadow.dart';
 
 import 'VerticalRatingBox.dart';
@@ -18,7 +17,7 @@ class HomeTopicCard extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: CardWidgetWithShadowAndInkwell(
           onTap: () => Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => ScreenTopicDetail(_topic))),
+              builder: (context) => ScreenTopicDetailPage(_topic))),
           child: Row(
             children: [
               Expanded(

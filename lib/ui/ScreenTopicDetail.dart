@@ -8,9 +8,9 @@ import 'package:tonband/style.dart';
 import 'components/RecordingWidget.dart';
 import 'components/VerticalRatingBox.dart';
 
-class ScreenTopicDetail extends ConsumerWidget {
+class ScreenTopicDetailPage extends ConsumerWidget {
   final Topic _topic;
-  const ScreenTopicDetail(this._topic) : super();
+  const ScreenTopicDetailPage(this._topic) : super();
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
