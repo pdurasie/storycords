@@ -7,6 +7,8 @@ class Topic implements Rateable {
   String title = "";
   String author = "";
   String description = "";
+
+  DateTime? dateCreated = DateTime.now(); //TODO remove this placeholder
   @override
   bool isUpvoted;
   @override
@@ -14,7 +16,11 @@ class Topic implements Rateable {
   @override
   Rating rating;
 
-  int recordingsAmount;
+  /// This variable may seem redundant at first. But we are saving a
+  /// database query by not having to look up the number of entries in the
+  /// corresponding recordings array.
+  /// Databases should be optimized for reading, not writing, after all.
+  int numberOfRecordings;
 
   Topic({
     this.title = "",
@@ -23,7 +29,7 @@ class Topic implements Rateable {
     required this.rating,
     this.isUpvoted = false,
     this.isDownvoted = false,
-    this.recordingsAmount = 0,
+    this.numberOfRecordings = 0,
   }) : super();
 
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tonband/models/Topic.dart';
 import 'package:tonband/ui/components/CardWidgetWithShadow.dart';
+import 'package:tonband/util/Formatter.dart';
 
 import '../ScreenTopicDetailPage.dart';
 import 'VerticalRatingBox.dart';
@@ -59,7 +60,7 @@ class TextDataContainer extends StatelessWidget {
             TextSpan(text: _topic.title),
             TextSpan(text: "\n"),
             TextSpan(
-                text: "von ${_topic.author}",
+                text: "${_topic.dateCreated?.formatToTimeAgo() ?? ""}",
                 style: Theme.of(context).textTheme.caption)
           ],
           style: Theme.of(context).textTheme.bodyText1,
@@ -72,7 +73,7 @@ class TextDataContainer extends StatelessWidget {
     return RichText(
         text: TextSpan(children: [
       TextSpan(
-          text: _topic.recordingsAmount.toString(),
+          text: _topic.numberOfRecordings.toString(),
           style: Theme.of(context).textTheme.caption?.copyWith(fontSize: 14)),
       WidgetSpan(
           child: Icon(

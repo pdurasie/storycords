@@ -37,7 +37,7 @@ class HomeBodyWidget extends StatelessWidget {
                   //this container makes sure everything is below the circular main card radius
                   Container(
                       height: MediaQuery.of(context).size.height * _bodyOffset),
-                  HomeCategoryTitle("Gerade beliebt"),
+                  HomeCategoryTitle("Gerade beliebt"), //TODO get from API
                   Consumer(builder: (context, watch, child) {
                     final responseAsyncValue = watch(topicsProvider);
                     return responseAsyncValue.map(

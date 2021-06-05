@@ -17,7 +17,7 @@ class TopicRepository {
                   description:
                       "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. ",
                   rating: Rating(index * 12),
-                  recordingsAmount: index * 2),
+                  numberOfRecordings: index * 2),
             ));
   }
 
