@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tonband/infrastructure/providers/providers.dart';
 import 'package:tonband/models/Recording.dart';
 import 'package:tonband/models/Topic.dart';
-import 'package:tonband/style.dart';
+import 'package:tonband/ui/components/CurrentlyPlayingControllerRow.dart';
 
 import 'components/RecordingWidget.dart';
 import 'components/VerticalRatingBox.dart';
@@ -21,10 +22,9 @@ class ScreenTopicDetailPage extends ConsumerWidget {
         () => context
             .read(topicDetailNotifierProvider.notifier)
             .getRecordings(121)); //TODO put in topic real id
-    final playingRecording = watch(playingRecordingProvider);
     return ProviderListener(
         onChange: (context, state) {
-          _showBottomModal();
+          // show bottom modal
         },
         provider: playingRecordingProvider,
         child: Scaffold(
@@ -42,7 +42,7 @@ class ScreenTopicDetailPage extends ConsumerWidget {
   }
 }
 
-class TopicDetailBody extends StatelessWidget {
+class TopicDetailBody extends ConsumerWidget {
   const TopicDetailBody({
     Key? key,
     required Topic topic,
@@ -52,24 +52,28 @@ class TopicDetailBody extends StatelessWidget {
   final Topic _topic;
 
   @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        color: colorGreyBackground,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
-          child: Column(
-            children: [
-              TopicHeader(
-                topic: _topic,
-              ),
-              TopicTonbandOverview(),
-            ],
+  Widget build(BuildContext context, ScopedReader watch) {
+    return Column(
+      children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: CustomScrollView(
+              slivers: [
+                //These are all slivers because I originally planned the header to
+                //collapse elegantly when scrolling down
+                //I left it as sliver so that everything now scrolls
+                SliverToBoxAdapter(), //empty box needed because of https://github.com/flutter/flutter/issues/55170
+                SliverToBoxAdapter(child: TopicHeader(topic: _topic)),
+                TopicTonbandOverview(),
+              ],
+            ),
           ),
         ),
-      ),
+        Hero(
+            tag: CurrentlyPlayingControllerRow.tag,
+            child: CurrentlyPlayingControllerRow()),
+      ],
     );
   }
 }
@@ -79,20 +83,22 @@ class TopicTonbandOverview extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     final responseAsyncValue = watch(recordingsProvider);
     return responseAsyncValue.map(
-      data: (recordings) => Expanded(
-        child: ListView.builder(
-            itemCount: recordings.value.length,
-            itemBuilder: (BuildContext context, int index) {
-              return RecordingWidget(
-                  recording: recordings.value.elementAt(index),
-                  onTap: () => changePlayingRecording(
-                      context, recordings.value.elementAt(index)));
-            }),
-      ),
-      loading: (_) => CircularProgressIndicator(),
-      error: (_) => Text(
-        _.error.toString(),
-        style: TextStyle(color: Colors.red),
+      data: (recordings) => SliverList(
+          delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          return RecordingWidget(
+              recording: recordings.value.elementAt(index),
+              onTap: () => changePlayingRecording(
+                  context, recordings.value.elementAt(index)));
+        },
+        childCount: recordings.value.length,
+      )),
+      loading: (_) => SliverToBoxAdapter(child: CircularProgressIndicator()),
+      error: (_) => SliverToBoxAdapter(
+        child: Text(
+          _.error.toString(),
+          style: TextStyle(color: Colors.red),
+        ),
       ),
     );
   }
@@ -141,24 +147,10 @@ class TopicHeader extends StatelessWidget {
   }
 }
 
-Widget _showBottomModal() {
-  return SizedBox.expand(
-    child: DraggableScrollableSheet(
-      builder: (BuildContext context, ScrollController scrollController) {
-        return Container(
-          color: Colors.blue[100],
-          child: ListView.builder(
-            controller: scrollController,
-            itemCount: 25,
-            itemBuilder: (BuildContext context, int index) {
-              return ListTile(title: Text('Item $index'));
-            },
-          ),
-        );
-      },
-    ),
-  );
-}
+// Diese Aufnahme melden
+// Gefällt mir
+// Gefällt mir nicht
+// Top 2 Kommentare
 
 /*
 Beschreibung

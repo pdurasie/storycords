@@ -39,6 +39,13 @@ class TopicRepository {
                   rating: Rating(31),
                   comments: null),
               Recording(
+                  title:
+                      "Das ist ja verrückt, das werdet ihr mir nicht glauben!",
+                  author: "Frank234",
+                  length: 12,
+                  rating: Rating(3101),
+                  comments: null),
+              Recording(
                   title: "Franzbrötchen am Strand",
                   author: "PatDog",
                   length: 425,

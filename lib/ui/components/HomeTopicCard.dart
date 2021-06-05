@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tonband/models/Topic.dart';
 import 'package:tonband/ui/components/CardWidgetWithShadow.dart';
 
+import '../ScreenTopicDetailPage.dart';
 import 'VerticalRatingBox.dart';
 
 class HomeTopicCard extends StatelessWidget {

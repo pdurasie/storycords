@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tonband/ui/components/CurrentlyPlayingControllerRow.dart';
 
 import 'components/HomeBody.dart';
 import 'components/HomeWelcomeHeader.dart';
@@ -14,10 +15,19 @@ class ScreenHome extends StatelessWidget {
       // we want to implement a sort of parallax behaviour,
       // so header and body are aligned in a stack where we scroll
       // over the header.
-      body: Stack(
+      body: Column(
         children: [
-          WelcomeHeaderWidget(),
-          HomeBodyWidget(),
+          Expanded(
+            child: Stack(
+              children: [
+                WelcomeHeaderWidget(),
+                HomeBodyWidget(),
+              ],
+            ),
+          ),
+          Hero(
+              tag: CurrentlyPlayingControllerRow.tag,
+              child: CurrentlyPlayingControllerRow())
         ],
       ),
     );
