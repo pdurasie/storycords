@@ -35,7 +35,8 @@ class CurrentlyPlayingControllerRow extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final currentRecording = watch(playingRecordingProvider).state;
+    final currentRecording = watch(currentRecordingProvider).state;
+    final playbackState = watch(playbackNotifierProvider);
     return Material(
       elevation: 20,
       borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
@@ -48,7 +49,9 @@ class CurrentlyPlayingControllerRow extends ConsumerWidget {
                 colors: [colorPrimary.withAlpha(130), colorPrimary])),
         duration: Duration(milliseconds: 600),
         curve: Curves.decelerate,
-        height: currentRecording != null ? 80 : 0,
+        height: playbackState is PlaybackInitial
+            ? 0
+            : 80, //hide the controller row initially
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.symmetric(horizontal: 16.0),
         child: Row(
@@ -65,7 +68,7 @@ class CurrentlyPlayingControllerRow extends ConsumerWidget {
                         style: Theme.of(context).textTheme.bodyText1),
                   ),
                   Text(
-                    "Dies ist ein wundervolles, atemberaubendes Topic mit der Nummer 0",
+                    currentRecording?.parentTopic.title ?? "",
                     style: Theme.of(context).textTheme.caption,
                   ),
                 ],
@@ -74,23 +77,25 @@ class CurrentlyPlayingControllerRow extends ConsumerWidget {
             Container(
               width: 100,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SvgPicture.asset(
                     "asset/images/icon_skip_15_ahead.svg",
                     height: 24,
                     width: 24,
                   ),
-                  Consumer(builder: (context, watch, child) {
-                    final state = watch(playbackNotifierProvider);
-                    if (state is PlaybackPlaying) {
-                      return buildPauseButton();
-                    } else if (state is PlaybackPaused) {
-                      return buildPlayButton();
-                    } else {
-                      return buildLoadingIndicator();
-                    }
-                  }),
+                  Expanded(
+                    child: Consumer(builder: (context, watch, child) {
+                      if (playbackState is PlaybackPlaying) {
+                        return buildPauseButton(context);
+                      } else if (playbackState is PlaybackLoading) {
+                        return buildLoadingIndicator();
+                      } else {
+                        //paused, initial or error
+                        return buildPlayButton(context);
+                      }
+                    }),
+                  ),
                   Icon(
                     Icons.skip_next,
                     size: 32,
@@ -104,21 +109,40 @@ class CurrentlyPlayingControllerRow extends ConsumerWidget {
     );
   }
 
-  Widget buildPlayButton() {
-    return Icon(
-      Icons.play_arrow,
-      size: 32,
+  Widget buildPlayButton(BuildContext context) {
+    return IconButton(
+      iconSize: 32,
+      icon: Icon(
+        Icons.play_arrow,
+      ),
+      onPressed: () {
+        final currRecording = context.read(currentRecordingProvider).state;
+        context
+            .read(playbackNotifierProvider.notifier)
+            .playRecording(currRecording);
+      },
     );
   }
 
   Widget buildLoadingIndicator() {
-    return CircularProgressIndicator.adaptive();
+    return Center(
+      //center + sized box so that we are sure to stay on size 32
+      child: SizedBox(
+        child: CircularProgressIndicator.adaptive(),
+        width: 32,
+        height: 32,
+      ),
+    );
   }
 
-  Widget buildPauseButton() {
-    return Icon(
-      Icons.pause,
-      size: 32,
+  Widget buildPauseButton(BuildContext context) {
+    return IconButton(
+      iconSize: 32,
+      icon: Icon(
+        Icons.pause,
+      ),
+      onPressed: () =>
+          context.read(playbackNotifierProvider.notifier).pausePlayback(),
     );
   }
 }

@@ -18,10 +18,9 @@ class PlaybackService {
     player.play();
     player.processingStateStream.listen((event) {
       if (event == ProcessingState.completed) {
-        player.pause();
         final notifier =
             ProviderContainer().read(playbackNotifierProvider.notifier);
-        notifier.setPlaybackPaused();
+        notifier.pausePlayback();
       }
     });
   }

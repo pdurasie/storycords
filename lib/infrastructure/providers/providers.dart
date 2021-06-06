@@ -24,8 +24,10 @@ final recordingsProvider = FutureProvider<List<Recording>>((ref) async {
       21); //TODO put in actual topic id, caches all the time otherwise
 });
 
-final playingRecordingProvider = StateProvider<Recording?>((ref) => null);
+final currentRecordingProvider = StateProvider<Recording?>((ref) => null);
 
 final audioPlayerProvider = Provider((ref) => AudioPlayer());
 
-final playbackNotifierProvider = StateNotifierProvider<PlaybackNotifier, PlaybackState>((ref) => PlaybackNotifier());
+final playbackNotifierProvider =
+    StateNotifierProvider<PlaybackNotifier, PlaybackState>(
+        (ref) => PlaybackNotifier());

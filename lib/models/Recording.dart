@@ -3,9 +3,13 @@ import 'package:tonband/models/Rateable.dart';
 
 import 'Comment.dart';
 import 'Rating.dart';
+import 'Topic.dart';
 
+//TODO clean up the dummy default data after backend is configured
 class Recording implements Rateable {
-  String title = "", author = "";
+  String title = "";
+  String author = "";
+  String url = "https://s3.amazonaws.com/scifri-segments/scifri201711241.mp3";
   int length = 0;
   @override
   bool isUpvoted;
@@ -15,6 +19,10 @@ class Recording implements Rateable {
   Rating rating;
   //DateTime datePosted;
   List<Comment>? comments;
+
+  Topic parentTopic = Topic(
+      title: "Dies ist ein ganz normales Topic, nichts Neues hier zu sehen",
+      rating: Rating(32));
 
   Recording(
       {this.title = "",

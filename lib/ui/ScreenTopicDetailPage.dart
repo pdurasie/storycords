@@ -26,7 +26,7 @@ class ScreenTopicDetailPage extends ConsumerWidget {
         onChange: (context, state) {
           // show bottom modal
         },
-        provider: playingRecordingProvider,
+        provider: currentRecordingProvider,
         child: Scaffold(
           appBar: AppBar(
             title: Text(
@@ -88,8 +88,8 @@ class TopicTonbandOverview extends ConsumerWidget {
         (BuildContext context, int index) {
           return RecordingWidget(
               recording: recordings.value.elementAt(index),
-              onTap: () => changePlayingRecording(
-                  context, recordings.value.elementAt(index)));
+              onTap: () =>
+                  playRecording(context, recordings.value.elementAt(index)));
         },
         childCount: recordings.value.length,
       )),
@@ -105,8 +105,9 @@ class TopicTonbandOverview extends ConsumerWidget {
   }
 }
 
-void changePlayingRecording(BuildContext context, Recording recording) {
-  context.read(playingRecordingProvider).state = recording;
+void playRecording(BuildContext context, Recording recording) {
+  context.read(currentRecordingProvider).state = recording;
+  context.read(playbackNotifierProvider.notifier).playRecording(recording);
 }
 
 class TopicHeader extends StatelessWidget {
