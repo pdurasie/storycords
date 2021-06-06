@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tonband/infrastructure/providers/providers.dart';
+import 'package:tonband/logic/playback/PlaybackNotifier.dart';
 
 import '../../style.dart';
 
@@ -40,59 +41,84 @@ class CurrentlyPlayingControllerRow extends ConsumerWidget {
       borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
       clipBehavior: Clip.antiAlias,
       child: AnimatedContainer(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [colorPrimary.withAlpha(130), colorPrimary])),
-          duration: Duration(milliseconds: 600),
-          curve: Curves.decelerate,
-          height: currentRecording != null ? 80 : 0,
-          width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4.0),
-                      child: Text(currentRecording?.title ?? "",
-                          style: Theme.of(context).textTheme.bodyText1),
-                    ),
-                    Text(
-                      "Dies ist ein wundervolles, atemberaubendes Topic mit der Nummer 0",
-                      style: Theme.of(context).textTheme.caption,
-                    ),
-                  ],
-                ),
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [colorPrimary.withAlpha(130), colorPrimary])),
+        duration: Duration(milliseconds: 600),
+        curve: Curves.decelerate,
+        height: currentRecording != null ? 80 : 0,
+        width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4.0),
+                    child: Text(currentRecording?.title ?? "",
+                        style: Theme.of(context).textTheme.bodyText1),
+                  ),
+                  Text(
+                    "Dies ist ein wundervolles, atemberaubendes Topic mit der Nummer 0",
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                ],
               ),
-              Container(
-                width: 100,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    SvgPicture.asset(
-                      "asset/images/icon_skip_15_ahead.svg",
-                      height: 24,
-                      width: 24,
-                    ),
-                    Icon(
-                      Icons.play_arrow,
-                      size: 32,
-                    ),
-                    Icon(
-                      Icons.skip_next,
-                      size: 32,
-                    ),
-                  ],
-                ),
-              )
-            ],
-          )),
+            ),
+            Container(
+              width: 100,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  SvgPicture.asset(
+                    "asset/images/icon_skip_15_ahead.svg",
+                    height: 24,
+                    width: 24,
+                  ),
+                  Consumer(builder: (context, watch, child) {
+                    final state = watch(playbackNotifierProvider);
+                    if (state is PlaybackPlaying) {
+                      return buildPauseButton();
+                    } else if (state is PlaybackPaused) {
+                      return buildPlayButton();
+                    } else {
+                      return buildLoadingIndicator();
+                    }
+                  }),
+                  Icon(
+                    Icons.skip_next,
+                    size: 32,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildPlayButton() {
+    return Icon(
+      Icons.play_arrow,
+      size: 32,
+    );
+  }
+
+  Widget buildLoadingIndicator() {
+    return CircularProgressIndicator.adaptive();
+  }
+
+  Widget buildPauseButton() {
+    return Icon(
+      Icons.pause,
+      size: 32,
     );
   }
 }

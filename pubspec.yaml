@@ -31,6 +31,8 @@ dependencies:
   flutter_riverpod: ^0.14.0+1
   # Library for recording sound.
   record: ^2.1.0+1
+  # Powerful library for playing audio.
+  just_audio: ^0.7.5
   # Get paths to device specific directories.
   path_provider: ^2.0.1
   # Request cross-platform permissions.

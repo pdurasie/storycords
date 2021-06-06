@@ -47,7 +47,7 @@ class HomeBodyWidget extends StatelessWidget {
                         ],
                       ),
                       loading: (_) =>
-                          Center(child: CircularProgressIndicator()),
+                          Center(child: CircularProgressIndicator.adaptive()),
                       error: (_) => Text(
                         _.error.toString(),
                         style: TextStyle(color: Colors.red),

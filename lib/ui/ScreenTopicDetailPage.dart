@@ -93,7 +93,8 @@ class TopicTonbandOverview extends ConsumerWidget {
         },
         childCount: recordings.value.length,
       )),
-      loading: (_) => SliverToBoxAdapter(child: CircularProgressIndicator()),
+      loading: (_) =>
+          SliverToBoxAdapter(child: CircularProgressIndicator.adaptive()),
       error: (_) => SliverToBoxAdapter(
         child: Text(
           _.error.toString(),
