@@ -1,6 +1,6 @@
 import 'package:riverpod/riverpod.dart';
 import 'package:tonband/logic/playback/PlaybackService.dart';
-import 'package:tonband/models/Recording.dart';
+import 'package:tonband/models/Tonband.dart';
 
 abstract class PlaybackState {
   const PlaybackState();
@@ -32,9 +32,9 @@ class PlaybackNotifier extends StateNotifier<PlaybackState> {
 
   //TODO: This should first start resuming, if possible. Or at least the current
   // use case should just resume and not always start again
-  Future<void> playRecording(Recording? recording) async {
-    if (recording != null) {
-      playFromUrl(recording.url);
+  Future<void> playTonband(Tonband? tonband) async {
+    if (tonband != null) {
+      playFromUrl(tonband.url);
     }
   }
 

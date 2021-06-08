@@ -7,7 +7,7 @@ import 'package:tonband/logic/playback/PlaybackNotifier.dart';
 
 import '../../style.dart';
 
-/// This widget is used for displaying the currently playing recording and
+/// This widget is used for displaying the currently playing tonband and
 /// for skipping, pausing, start, ...
 ///
 /// How to use this widget:
@@ -26,7 +26,7 @@ import '../../style.dart';
 ///             child: CurrentlyPlayingControllerRow())
 ///             ];
 ///
-/// Implement this on every single screen. It is invisible until a recording is
+/// Implement this on every single screen. It is invisible until a tonband is
 /// started, so you're safe to do so.
 ///
 class CurrentlyPlayingControllerRow extends ConsumerWidget {
@@ -35,7 +35,7 @@ class CurrentlyPlayingControllerRow extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final currentRecording = watch(currentRecordingProvider).state;
+    final currentTonband = watch(currentTonbandProvider).state;
     final playbackState = watch(playbackNotifierProvider);
     return Material(
       elevation: 20,
@@ -64,11 +64,11 @@ class CurrentlyPlayingControllerRow extends ConsumerWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 4.0),
-                    child: Text(currentRecording?.title ?? "",
+                    child: Text(currentTonband?.title ?? "",
                         style: Theme.of(context).textTheme.bodyText1),
                   ),
                   Text(
-                    currentRecording?.parentTopic.title ?? "",
+                    currentTonband?.parentTopic.title ?? "",
                     style: Theme.of(context).textTheme.caption,
                   ),
                 ],
@@ -116,10 +116,10 @@ class CurrentlyPlayingControllerRow extends ConsumerWidget {
         Icons.play_arrow,
       ),
       onPressed: () {
-        final currRecording = context.read(currentRecordingProvider).state;
+        final currTonband = context.read(currentTonbandProvider).state;
         context
             .read(playbackNotifierProvider.notifier)
-            .playRecording(currRecording);
+            .playTonband(currTonband);
       },
     );
   }

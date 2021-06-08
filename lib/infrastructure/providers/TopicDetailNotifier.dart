@@ -1,6 +1,6 @@
 import 'package:riverpod/riverpod.dart';
 import 'package:tonband/infrastructure/TopicRepository.dart';
-import 'package:tonband/models/Recording.dart';
+import 'package:tonband/models/Tonband.dart';
 
 abstract class TopicDetailState {
   const TopicDetailState();
@@ -15,8 +15,8 @@ class TopicDetailLoading extends TopicDetailState {
 }
 
 class TopicDetailFullyLoaded extends TopicDetailState {
-  final List<Recording> _recordings;
-  const TopicDetailFullyLoaded(this._recordings);
+  final List<Tonband> tonbands;
+  const TopicDetailFullyLoaded(this.tonbands);
 }
 
 class TopicDetailError extends TopicDetailState {
@@ -30,11 +30,11 @@ class TopicDetailNotifier extends StateNotifier<TopicDetailState> {
 
   TopicDetailNotifier(this._topicRepository) : super(TopicDetailInitial());
 
-  Future<void> getRecordings(int id) async {
+  Future<void> getTonbands(int id) async {
     try {
       state = TopicDetailLoading();
-      final recordings = await _topicRepository.getRecordingsByTopicId(id);
-      state = TopicDetailFullyLoaded(recordings);
+      final tonbands = await _topicRepository.getTonbandsByTopicId(id);
+      state = TopicDetailFullyLoaded(tonbands);
     } on Exception {
       state = TopicDetailError("Failed");
     }

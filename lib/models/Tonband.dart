@@ -6,7 +6,7 @@ import 'Rating.dart';
 import 'Topic.dart';
 
 //TODO clean up the dummy default data after backend is configured
-class Recording implements Rateable {
+class Tonband implements Rateable {
   String title = "";
   String author = "";
   String url = "https://s3.amazonaws.com/scifri-segments/scifri201711241.mp3";
@@ -24,7 +24,7 @@ class Recording implements Rateable {
       title: "Dies ist ein ganz normales Topic, nichts Neues hier zu sehen",
       rating: Rating(32));
 
-  Recording(
+  Tonband(
       {this.title = "",
       this.author = "",
       this.length = 0,

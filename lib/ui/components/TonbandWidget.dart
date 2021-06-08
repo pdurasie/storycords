@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tonband/models/Recording.dart';
+import 'package:tonband/models/Tonband.dart';
 import 'package:tonband/style.dart';
 import 'package:tonband/ui/components/CardWidgetWithShadow.dart';
 import 'package:tonband/ui/components/VerticalRatingBox.dart';
@@ -7,11 +7,10 @@ import 'package:tonband/util/Formatter.dart';
 
 import '../../style.dart';
 
-class RecordingWidget extends StatelessWidget {
-  final Recording recording;
+class TonbandWidget extends StatelessWidget {
+  final Tonband tonband;
   final GestureTapCallback? onTap;
-  const RecordingWidget(
-      {Key? key, required this.recording, required this.onTap})
+  const TonbandWidget({Key? key, required this.tonband, required this.onTap})
       : super(key: key);
 
   @override
@@ -22,12 +21,12 @@ class RecordingWidget extends StatelessWidget {
         onTap: onTap,
         child: Row(
           children: [
-            PlayButtonWithTime(timeString: recording.length.toDurationString()),
+            PlayButtonWithTime(timeString: tonband.length.toDurationString()),
             InfoText(
-              recording: recording,
+              tonband: tonband,
             ),
             RatingBoxVertical(
-              rateable: recording,
+              rateable: tonband,
             )
           ],
         ),
@@ -37,10 +36,10 @@ class RecordingWidget extends StatelessWidget {
 }
 
 class InfoText extends StatelessWidget {
-  final Recording recording;
+  final Tonband tonband;
 
   const InfoText({
-    required this.recording,
+    required this.tonband,
     Key? key,
   }) : super();
 
@@ -51,7 +50,7 @@ class InfoText extends StatelessWidget {
           text: TextSpan(
         children: [
           TextSpan(
-              text: recording.title,
+              text: tonband.title,
               style: Theme.of(context).textTheme.bodyText1),
           WidgetSpan(
               child: Padding(
@@ -60,7 +59,7 @@ class InfoText extends StatelessWidget {
           )),
           TextSpan(text: "\n"),
           TextSpan(
-              text: "von ${recording.author} vor 2 Jahren",
+              text: "von ${tonband.author} vor 2 Jahren",
               style: Theme.of(context).textTheme.caption),
           WidgetSpan(
               child: Padding(
@@ -68,8 +67,8 @@ class InfoText extends StatelessWidget {
             child: Container(),
           )),
           WidgetSpan(
-              child: RecordingMetaInfoRow(
-            recording: recording,
+              child: TonbandMetaInfoRow(
+            tonband: tonband,
           ))
         ],
       )),
@@ -77,11 +76,11 @@ class InfoText extends StatelessWidget {
   }
 }
 
-class RecordingMetaInfoRow extends StatelessWidget {
-  final Recording recording;
+class TonbandMetaInfoRow extends StatelessWidget {
+  final Tonband tonband;
 
-  const RecordingMetaInfoRow({
-    required this.recording,
+  const TonbandMetaInfoRow({
+    required this.tonband,
     Key? key,
   }) : super(key: key);
 
@@ -97,7 +96,7 @@ class RecordingMetaInfoRow extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 4.0),
           child: Text(
-            recording.comments?.length.toString() ?? "0",
+            tonband.comments?.length.toString() ?? "0",
             style: TextStyle(color: Colors.grey, fontSize: 12),
           ),
         ),

@@ -73,7 +73,7 @@ class TextDataContainer extends StatelessWidget {
     return RichText(
         text: TextSpan(children: [
       TextSpan(
-          text: _topic.numberOfRecordings.toString(),
+          text: _topic.numberOfTonbands.toString(),
           style: Theme.of(context).textTheme.caption?.copyWith(fontSize: 14)),
       WidgetSpan(
           child: Icon(

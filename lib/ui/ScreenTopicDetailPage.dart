@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tonband/infrastructure/providers/providers.dart';
-import 'package:tonband/models/Recording.dart';
+import 'package:tonband/models/Tonband.dart';
 import 'package:tonband/models/Topic.dart';
+import 'package:tonband/ui/ScreenRecordingDetailPage.dart';
 import 'package:tonband/ui/components/CurrentlyPlayingControllerRow.dart';
 
-import 'components/RecordingWidget.dart';
+import 'components/TonbandWidget.dart';
 import 'components/VerticalRatingBox.dart';
 
 class ScreenTopicDetailPage extends ConsumerWidget {
@@ -21,12 +22,12 @@ class ScreenTopicDetailPage extends ConsumerWidget {
         Duration.zero,
         () => context
             .read(topicDetailNotifierProvider.notifier)
-            .getRecordings(121)); //TODO put in topic real id
+            .getTonbands(121)); //TODO put in topic real id
     return ProviderListener(
         onChange: (context, state) {
           // show bottom modal
         },
-        provider: currentRecordingProvider,
+        provider: currentTonbandProvider,
         child: Scaffold(
           appBar: AppBar(
             title: Text(
@@ -81,17 +82,18 @@ class TopicDetailBody extends ConsumerWidget {
 class TopicTonbandOverview extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final responseAsyncValue = watch(recordingsProvider);
+    final responseAsyncValue = watch(tonbandsProvider);
     return responseAsyncValue.map(
-      data: (recordings) => SliverList(
+      data: (tonbands) => SliverList(
           delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
-          return RecordingWidget(
-              recording: recordings.value.elementAt(index),
-              onTap: () =>
-                  playRecording(context, recordings.value.elementAt(index)));
+          return TonbandWidget(
+              tonband: tonbands.value.elementAt(index),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ScreenTonbandDetailPage())));
+          //playRecording(context, recordings.value.elementAt(index)));
         },
-        childCount: recordings.value.length,
+        childCount: tonbands.value.length,
       )),
       loading: (_) => SliverToBoxAdapter(
           child: Center(child: CircularProgressIndicator.adaptive())),
@@ -105,9 +107,9 @@ class TopicTonbandOverview extends ConsumerWidget {
   }
 }
 
-void playRecording(BuildContext context, Recording recording) {
-  context.read(currentRecordingProvider).state = recording;
-  context.read(playbackNotifierProvider.notifier).playRecording(recording);
+void playRecording(BuildContext context, Tonband recording) {
+  context.read(currentTonbandProvider).state = recording;
+  context.read(playbackNotifierProvider.notifier).playTonband(recording);
 }
 
 class TopicHeader extends StatelessWidget {

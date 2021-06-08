@@ -1,5 +1,5 @@
 import 'package:tonband/models/Rating.dart';
-import 'package:tonband/models/Recording.dart';
+import 'package:tonband/models/Tonband.dart';
 import 'package:tonband/models/Topic.dart';
 
 class TopicRepository {
@@ -17,35 +17,35 @@ class TopicRepository {
                   description:
                       "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. ",
                   rating: Rating(index * 12),
-                  numberOfRecordings: index * 2),
+                  numberOfTonbands: index * 2),
             ));
   }
 
-  Future<List<Recording>> getRecordingsByTopicId(int id) async {
+  Future<List<Tonband>> getTonbandsByTopicId(int id) async {
     return Future.delayed(
         Duration(seconds: 2),
         () => [
-              Recording(
+              Tonband(
                   title:
                       "Als ich mich endlich traute, meinen Mitbewohner rauszuschmeißen",
                   author: "Lucia",
                   length: 412,
                   rating: Rating(91),
                   comments: null),
-              Recording(
+              Tonband(
                   title: "Ich dachte schon, ich guck nicht richtig!",
                   author: "David313",
                   length: 123,
                   rating: Rating(31),
                   comments: null),
-              Recording(
+              Tonband(
                   title:
                       "Das ist ja verrückt, das werdet ihr mir nicht glauben!",
                   author: "Frank234",
                   length: 12,
                   rating: Rating(3101),
                   comments: null),
-              Recording(
+              Tonband(
                   title: "Franzbrötchen am Strand",
                   author: "PatDog",
                   length: 425,
