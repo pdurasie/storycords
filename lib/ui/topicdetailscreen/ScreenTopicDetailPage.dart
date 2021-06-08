@@ -4,11 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tonband/infrastructure/providers/providers.dart';
 import 'package:tonband/models/Tonband.dart';
 import 'package:tonband/models/Topic.dart';
-import 'package:tonband/ui/ScreenRecordingDetailPage.dart';
 import 'package:tonband/ui/components/CurrentlyPlayingControllerRow.dart';
+import 'package:tonband/ui/screentonbanddetailscreen/ScreenTonbandDetailPage.dart';
 
-import 'components/TonbandWidget.dart';
-import 'components/VerticalRatingBox.dart';
+import '../components/VerticalRatingBox.dart';
+import 'TonbandWidget.dart';
 
 class ScreenTopicDetailPage extends ConsumerWidget {
   final Topic _topic;

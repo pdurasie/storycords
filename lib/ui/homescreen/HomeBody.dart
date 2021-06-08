@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tonband/infrastructure/providers/providers.dart';
-import 'package:tonband/ui/components/HomeTopicCard.dart';
-import 'package:tonband/ui/components/HomeWelcomeHeader.dart';
+import 'package:tonband/ui/homescreen/HomeTopicCard.dart';
+import 'package:tonband/ui/homescreen/HomeWelcomeHeader.dart';
 
 import '../../style.dart';
 import 'HomeCategoryTitle.dart';

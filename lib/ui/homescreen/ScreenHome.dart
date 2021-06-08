@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tonband/ui/components/CurrentlyPlayingControllerRow.dart';
 
-import 'components/HomeBody.dart';
-import 'components/HomeWelcomeHeader.dart';
+import 'HomeBody.dart';
+import 'HomeWelcomeHeader.dart';
 
 class ScreenHome extends StatelessWidget {
   const ScreenHome({
