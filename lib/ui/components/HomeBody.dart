@@ -46,8 +46,12 @@ class HomeBodyWidget extends StatelessWidget {
                           for (var topic in topics.value) HomeTopicCard(topic)
                         ],
                       ),
-                      loading: (_) =>
-                          Center(child: CircularProgressIndicator.adaptive()),
+                      loading: (_) => Container(
+                          height: MediaQuery.of(context)
+                              .size
+                              .height, //TODO this is not true (too large)
+                          child: Center(
+                              child: CircularProgressIndicator.adaptive())),
                       error: (_) => Text(
                         _.error.toString(),
                         style: TextStyle(color: Colors.red),
