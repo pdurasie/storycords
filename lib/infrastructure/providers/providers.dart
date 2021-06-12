@@ -4,6 +4,7 @@ import 'package:riverpod/riverpod.dart';
 import 'package:tonband/infrastructure/TopicRepository.dart';
 import 'package:tonband/infrastructure/providers/TopicDetailNotifier.dart';
 import 'package:tonband/logic/playback/PlaybackNotifier.dart';
+import 'package:tonband/logic/playback/PlaybackService.dart';
 import 'package:tonband/models/Tonband.dart';
 import 'package:tonband/models/Topic.dart';
 
@@ -26,8 +27,11 @@ final tonbandsProvider = FutureProvider<List<Tonband>>((ref) async {
 
 final currentTonbandProvider = StateProvider<Tonband?>((ref) => null);
 
-final audioPlayerProvider = Provider((ref) => AudioPlayer());
+final audioPlayerProvider = Provider.autoDispose((ref) => AudioPlayer());
+
+final playbackServiceProvider = Provider.autoDispose(
+    (ref) => PlaybackService(ref.read(audioPlayerProvider)));
 
 final playbackNotifierProvider =
     StateNotifierProvider<PlaybackNotifier, PlaybackState>(
-        (ref) => PlaybackNotifier());
+        (ref) => PlaybackNotifier(ref.read(playbackServiceProvider)));

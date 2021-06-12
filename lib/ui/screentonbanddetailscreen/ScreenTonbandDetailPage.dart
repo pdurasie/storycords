@@ -1,14 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:tonband/models/Tonband.dart';
+import 'package:tonband/style.dart';
+import 'package:tonband/ui/components/CurrentlyPlayingControllerRow.dart';
 
 class ScreenTonbandDetailPage extends StatelessWidget {
-  const ScreenTonbandDetailPage({Key? key}) : super(key: key);
+  Tonband _tonband;
+  ScreenTonbandDetailPage(this._tonband);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(""),
-      ),
+    return Stack(
+      children: [
+        Column(children: [
+          Expanded(
+            child: Container(
+              color: colorGreyBackground,
+            ),
+          ),
+          Hero(
+              tag: CurrentlyPlayingControllerRow.tag,
+              child: CurrentlyPlayingControllerRow()),
+        ]),
+        Positioned(
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+          ),
+        )
+      ],
     );
   }
 }

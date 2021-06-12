@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:tonband/logic/playback/PlaybackService.dart';
 import 'package:tonband/models/Tonband.dart';
@@ -28,21 +29,25 @@ class PlaybackError extends PlaybackState {
 }
 
 class PlaybackNotifier extends StateNotifier<PlaybackState> {
-  PlaybackNotifier() : super(PlaybackInitial());
+  final PlaybackService _playbackService;
+  PlaybackNotifier(this._playbackService) : super(PlaybackInitial());
 
-  //TODO: This should first start resuming, if possible. Or at least the current
-  // use case should just resume and not always start again
   Future<void> playTonband(Tonband? tonband) async {
     if (tonband != null) {
-      playFromUrl(tonband.url);
+      if (_playbackService.isPlayerIdle()) {
+        //audio hasn't loaded yet
+        playFromUrl(tonband.url);
+      } else {
+        _playbackService.playSingleTrack();
+      }
     }
   }
 
   Future<void> playFromUrl(String url) async {
     try {
       state = PlaybackLoading();
-      await PlaybackService.setUrl(url);
-      PlaybackService.playSingleTrack();
+      await _playbackService.setUrl(url);
+      _playbackService.playSingleTrack();
       state = PlaybackPlaying();
     } on Exception {
       state = PlaybackError("Failed");
@@ -50,7 +55,7 @@ class PlaybackNotifier extends StateNotifier<PlaybackState> {
   }
 
   void pausePlayback() {
-    PlaybackService.pause();
+    _playbackService.pause();
     _setPlaybackPaused();
   }
 

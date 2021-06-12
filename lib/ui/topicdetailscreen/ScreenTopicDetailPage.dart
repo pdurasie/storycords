@@ -88,10 +88,14 @@ class TopicTonbandOverview extends ConsumerWidget {
           delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
           return TonbandWidget(
-              tonband: tonbands.value.elementAt(index),
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ScreenTonbandDetailPage())));
-          //playRecording(context, recordings.value.elementAt(index)));
+            tonband: tonbands.value.elementAt(index),
+            onTap: () {
+              playTonband(context, tonbands.value.elementAt(index));
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ScreenTonbandDetailPage(
+                      tonbands.value.elementAt(index))));
+            },
+          );
         },
         childCount: tonbands.value.length,
       )),
@@ -107,7 +111,7 @@ class TopicTonbandOverview extends ConsumerWidget {
   }
 }
 
-void playRecording(BuildContext context, Tonband recording) {
+void playTonband(BuildContext context, Tonband recording) {
   context.read(currentTonbandProvider).state = recording;
   context.read(playbackNotifierProvider.notifier).playTonband(recording);
 }
