@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:just_audio/just_audio.dart';
 
 /// This class is responsible for playing audio in the foreground.
@@ -53,5 +55,52 @@ class PlaybackService {
 
   isPlayerIdle() {
     return _audioPlayer.processingState == ProcessingState.idle;
+  }
+
+  Stream<TonbandPlayerState> get playerStateStream => _audioPlayer
+      .playerStateStream
+      .map((event) => TonbandPlayerState(event.playing, event.processingState));
+}
+
+class TonbandPlayerState extends PlayerState {
+  TonbandProcessingState get tonbandProcessingState =>
+      processingState.toTonbandProcessingState();
+
+  TonbandPlayerState(bool playing, ProcessingState processingState)
+      : super(playing, processingState);
+}
+
+// Copied from ProcessingState
+enum TonbandProcessingState {
+  /// The player has not loaded an [AudioSource].
+  idle,
+
+  /// The player is loading an [AudioSource].
+  loading,
+
+  /// The player is buffering audio and unable to play.
+  buffering,
+
+  /// The player is has enough audio buffered and is able to play.
+  ready,
+
+  /// The player has reached the end of the audio.
+  completed,
+}
+
+extension ProcessingStateMapper on ProcessingState {
+  TonbandProcessingState toTonbandProcessingState() {
+    switch (this) {
+      case ProcessingState.idle:
+        return TonbandProcessingState.idle;
+      case ProcessingState.loading:
+        return TonbandProcessingState.loading;
+      case ProcessingState.buffering:
+        return TonbandProcessingState.buffering;
+      case ProcessingState.ready:
+        return TonbandProcessingState.ready;
+      case ProcessingState.completed:
+        return TonbandProcessingState.completed;
+    }
   }
 }

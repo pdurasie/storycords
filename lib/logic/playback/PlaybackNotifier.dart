@@ -23,6 +23,10 @@ class PlaybackPaused extends PlaybackState {
   const PlaybackPaused();
 }
 
+class PlaybackCompleted extends PlaybackState {
+  const PlaybackCompleted();
+}
+
 class PlaybackError extends PlaybackState {
   final String message;
   const PlaybackError(this.message);
@@ -30,7 +34,22 @@ class PlaybackError extends PlaybackState {
 
 class PlaybackNotifier extends StateNotifier<PlaybackState> {
   final PlaybackService _playbackService;
-  PlaybackNotifier(this._playbackService) : super(PlaybackInitial());
+  PlaybackNotifier(this._playbackService) : super(PlaybackInitial()) {
+    /// Maps a player state event to a playback state.
+    _playbackService.playerStateStream.listen((event) {
+      if (event.tonbandProcessingState == TonbandProcessingState.loading ||
+          event.tonbandProcessingState == TonbandProcessingState.buffering) {
+        state = PlaybackLoading();
+      } else if (!event.playing) {
+        state = PlaybackPaused();
+      } else if (event.tonbandProcessingState !=
+          TonbandProcessingState.completed) {
+        state = PlaybackPlaying();
+      } else {
+        state = PlaybackCompleted();
+      }
+    });
+  }
 
   Future<void> playTonband(Tonband? tonband) async {
     if (tonband != null) {
@@ -45,10 +64,8 @@ class PlaybackNotifier extends StateNotifier<PlaybackState> {
 
   Future<void> playFromUrl(String url) async {
     try {
-      state = PlaybackLoading();
       await _playbackService.setUrl(url);
       _playbackService.playSingleTrack();
-      state = PlaybackPlaying();
     } on Exception {
       state = PlaybackError("Failed");
     }
@@ -56,14 +73,5 @@ class PlaybackNotifier extends StateNotifier<PlaybackState> {
 
   void pausePlayback() {
     _playbackService.pause();
-    _setPlaybackPaused();
-  }
-
-  void _setPlaybackPaused() {
-    state = PlaybackPaused();
-  }
-
-  void _setPlaybackFinished() {
-    state = PlaybackInitial();
   }
 }
