@@ -48,7 +48,9 @@ class PlaybackNotifier extends StateNotifier<PlaybackState> {
       } else {
         state = PlaybackCompleted();
       }
-    });
+    },
+        onError: (Object o, StackTrace stackTrace) =>
+            state = PlaybackError(o.toString()));
   }
 
   Future<void> playTonband(Tonband? tonband) async {
