@@ -59,18 +59,14 @@ class PlaybackNotifier extends StateNotifier<PlaybackState> {
         //audio hasn't loaded yet
         playFromUrl(tonband.url);
       } else {
-        _playbackService.playSingleTrack();
+        _playbackService.play();
       }
     }
   }
 
   Future<void> playFromUrl(String url) async {
-    try {
-      await _playbackService.setUrl(url);
-      _playbackService.playSingleTrack();
-    } on Exception {
-      state = PlaybackError("Failed");
-    }
+    await _playbackService.setUrl(url);
+    _playbackService.play();
   }
 
   void pausePlayback() {

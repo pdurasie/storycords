@@ -20,23 +20,9 @@ class PlaybackService {
     }
   }
 
-  /// Plays the loaded resource and pauses the player on completion.
-  void playSingleTrack() {
+  /// Plays the loaded resource.
+  void play() {
     _audioPlayer.play();
-    _audioPlayer.playbackEventStream.listen((event) {},
-        onError: (Object e, StackTrace stackTrace) {
-      print('A stream error occurred: $e');
-    });
-    _audioPlayer.processingStateStream.listen((event) {
-      if (event == ProcessingState.completed) {
-        /*
-        final notifier =
-            ProviderContainer().read(playbackNotifierProvider.notifier);
-        notifier.pausePlayback();
-
-         */
-      }
-    });
   }
 
   playFromLocalStorage(final String path) async {}
