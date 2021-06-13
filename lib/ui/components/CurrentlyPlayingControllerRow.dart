@@ -180,7 +180,7 @@ class PlayButtonControllerWidget extends ConsumerWidget {
     return Center(
       //center + sized box so that we are sure to stay on size 32
       child: SizedBox(
-          width: 32, height: 32, child: CircularProgressIndicator.adaptive()),
+          width: 42, height: 42, child: CircularProgressIndicator.adaptive()),
     );
   }
 
