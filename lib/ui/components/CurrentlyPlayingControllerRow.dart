@@ -35,7 +35,6 @@ class CurrentlyPlayingControllerRow extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final currentTonband = watch(currentTonbandProvider).state;
     final playbackState = watch(playbackNotifierProvider);
     return Material(
       elevation: 20,
@@ -58,54 +57,109 @@ class CurrentlyPlayingControllerRow extends ConsumerWidget {
           children: [
             Expanded(
               flex: 1,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4.0),
-                    child: Text(currentTonband?.title ?? "",
-                        style: Theme.of(context).textTheme.bodyText1),
-                  ),
-                  Text(
-                    currentTonband?.parentTopic.title ?? "",
-                    style: Theme.of(context).textTheme.caption,
-                  ),
-                ],
-              ),
+              child: CurrentlyPlayingTitleWidget(),
             ),
-            Container(
-              width: 100,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SvgPicture.asset(
-                    "asset/images/icon_skip_15_ahead.svg",
-                    height: 24,
-                    width: 24,
-                  ),
-                  Expanded(
-                    child: Consumer(builder: (context, watch, child) {
-                      if (playbackState is PlaybackPlaying) {
-                        return buildPauseButton(context);
-                      } else if (playbackState is PlaybackLoading) {
-                        return buildLoadingIndicator();
-                      } else {
-                        //paused, initial or error
-                        return buildPlayButton(context);
-                      }
-                    }),
-                  ),
-                  Icon(
-                    Icons.skip_next,
-                    size: 32,
-                  ),
-                ],
-              ),
-            ),
+            PlaybackControlsWidget(),
           ],
         ),
       ),
+    );
+  }
+}
+
+class CurrentlyPlayingTitleWidget extends ConsumerWidget {
+  const CurrentlyPlayingTitleWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, ScopedReader watch) {
+    final currentTonband = watch(currentTonbandProvider).state;
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4.0),
+          child: Text(currentTonband?.title ?? "",
+              style: Theme.of(context).textTheme.bodyText1),
+        ),
+        Text(
+          currentTonband?.parentTopic.title ?? "",
+          style: Theme.of(context).textTheme.caption,
+        ),
+      ],
+    );
+  }
+}
+
+class PlaybackControlsWidget extends StatelessWidget {
+  const PlaybackControlsWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 100,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Skip15AheadButtonWidget(),
+          Expanded(child: PlayButtonControllerWidget()),
+          SkipButtonWidget(),
+        ],
+      ),
+    );
+  }
+}
+
+class Skip15AheadButtonWidget extends StatelessWidget {
+  const Skip15AheadButtonWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SvgPicture.asset(
+      "asset/images/icon_skip_15_ahead.svg",
+      height: 24,
+      width: 24,
+    );
+  }
+}
+
+class SkipButtonWidget extends StatelessWidget {
+  const SkipButtonWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Icon(
+      Icons.skip_next,
+      size: 32,
+    );
+  }
+}
+
+/// Shows a pause button while playing a track. Shows a loading indicator
+/// while loading. Shows a play button otherwise.
+class PlayButtonControllerWidget extends ConsumerWidget {
+  const PlayButtonControllerWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, ScopedReader watch) {
+    final playbackState = watch(playbackNotifierProvider);
+    return Expanded(
+      child: Consumer(builder: (context, watch, child) {
+        if (playbackState is PlaybackPlaying) {
+          return buildPauseButton(context);
+        } else if (playbackState is PlaybackLoading) {
+          return buildLoadingIndicator();
+        } else {
+          //paused, initial or error
+          return buildPlayButton(context);
+        }
+      }),
     );
   }
 
