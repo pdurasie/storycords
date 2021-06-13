@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../style.dart';
 
+// TODO: This doesn't work atm, but will be replaced by a new front page design anyway
 class WelcomeHeaderWidget extends StatelessWidget {
   static const headerSizeMultiplier = 0.25;
 
@@ -9,9 +10,7 @@ class WelcomeHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Container(
-      height: size.height * headerSizeMultiplier,
       color: colorPrimary,
       child: Align(
         alignment: AlignmentDirectional.centerStart,

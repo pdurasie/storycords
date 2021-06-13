@@ -37,9 +37,12 @@ class HomeBodyWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   //this container makes sure everything is below the circular main card radius
-                  Container(
-                      height: MediaQuery.of(context).size.height * _bodyOffset),
-                  HomeCategoryTitle("Gerade beliebt"), //TODO get from API
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: HomeCategoryTitle("Gerade beliebt"),
+                    ),
+                  ), //TODO get from API
                   Consumer(builder: (context, watch, child) {
                     final responseAsyncValue = watch(topicsProvider);
                     return responseAsyncValue.map(

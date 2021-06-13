@@ -3,8 +3,8 @@ import 'package:tonband/models/Topic.dart';
 import 'package:tonband/ui/components/CardWidgetWithShadow.dart';
 import 'package:tonband/util/Formatter.dart';
 
-import '../topicdetailscreen/ScreenTopicDetailPage.dart';
 import '../components/VerticalRatingBox.dart';
+import '../topicdetailscreen/ScreenTopicDetailPage.dart';
 
 class HomeTopicCard extends StatelessWidget {
   final Topic _topic;
