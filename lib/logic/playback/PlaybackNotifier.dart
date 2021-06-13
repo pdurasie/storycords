@@ -40,6 +40,8 @@ class PlaybackNotifier extends StateNotifier<PlaybackState> {
       if (event.tonbandProcessingState == TonbandProcessingState.loading ||
           event.tonbandProcessingState == TonbandProcessingState.buffering) {
         state = PlaybackLoading();
+      } else if (event.tonbandProcessingState == TonbandProcessingState.idle) {
+        state = PlaybackInitial();
       } else if (!event.playing) {
         state = PlaybackPaused();
       } else if (event.tonbandProcessingState !=

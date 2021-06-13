@@ -25,7 +25,9 @@ class ScreenHome extends StatelessWidget {
               ],
             ),
           ),
-          CurrentlyPlayingControllerRow()
+          Hero(
+              tag: CurrentlyPlayingControllerRow.tag,
+              child: CurrentlyPlayingControllerRow()),
         ],
       ),
     );

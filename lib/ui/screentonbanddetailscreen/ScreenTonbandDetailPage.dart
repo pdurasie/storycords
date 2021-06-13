@@ -17,14 +17,10 @@ class ScreenTonbandDetailPage extends StatelessWidget {
               color: colorGreyBackground,
             ),
           ),
-          CurrentlyPlayingControllerRow(),
+          Hero(
+              tag: CurrentlyPlayingControllerRow.tag,
+              child: CurrentlyPlayingControllerRow()),
         ]),
-        Positioned(
-          child: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-          ),
-        )
       ],
     );
   }

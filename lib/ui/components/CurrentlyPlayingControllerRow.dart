@@ -141,8 +141,7 @@ class CurrentlyPlayingControllerRow extends ConsumerWidget {
       icon: Icon(
         Icons.pause,
       ),
-      onPressed: () =>
-          context.read(playbackNotifierProvider.notifier).pausePlayback(),
+      onPressed: context.read(playbackNotifierProvider.notifier).pausePlayback,
     );
   }
 }
