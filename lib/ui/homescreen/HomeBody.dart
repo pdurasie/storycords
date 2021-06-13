@@ -22,12 +22,14 @@ class HomeBodyWidget extends StatelessWidget {
       return SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.only(
-            // add top margin to have only slight overlap to the header
-            top: MediaQuery.of(context).size.height * _bodyTopOffsetMultiplier,
-          ),
+              // add top margin to have only slight overlap to the header
+              top:
+                  MediaQuery.of(context).size.height * _bodyTopOffsetMultiplier,
+              left: 8,
+              right: 8),
           child: Material(
             elevation: 20,
-            borderRadius: BorderRadius.all(Radius.circular(60.0)),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(60.0)),
             clipBehavior: Clip.antiAlias,
             child: Container(
               color: colorGreyBackground,
