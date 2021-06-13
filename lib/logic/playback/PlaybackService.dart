@@ -25,21 +25,24 @@ class PlaybackService {
     _audioPlayer.play();
   }
 
-  playFromLocalStorage(final String path) async {}
+  void playFromLocalStorage(final String path) async {}
 
-  fastForward15() async {}
+  void fastForward15() {
+    final currentPos = _audioPlayer.position;
+    _audioPlayer.seek(currentPos + Duration(seconds: 15));
+  }
 
-  resume() async {}
+  void resume() async {}
 
-  pause() async {
+  void pause() async {
     _audioPlayer.pause();
   }
 
-  stop() async {
+  void stop() async {
     _audioPlayer.stop();
   }
 
-  isPlayerIdle() {
+  bool isPlayerIdle() {
     return _audioPlayer.processingState == ProcessingState.idle;
   }
 

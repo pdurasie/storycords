@@ -71,9 +71,7 @@ class TopicDetailBody extends ConsumerWidget {
             ),
           ),
         ),
-        Hero(
-            tag: CurrentlyPlayingControllerRow.tag,
-            child: CurrentlyPlayingControllerRow()),
+        CurrentlyPlayingControllerRow(),
       ],
     );
   }

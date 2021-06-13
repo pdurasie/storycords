@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:tonband/infrastructure/providers/providers.dart';
 import 'package:tonband/logic/playback/PlaybackNotifier.dart';
 
@@ -52,7 +51,7 @@ class CurrentlyPlayingControllerRow extends ConsumerWidget {
             ? 0
             : 80, //hide the controller row initially
         width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        padding: EdgeInsets.symmetric(horizontal: 12.0),
         child: Row(
           children: [
             Expanded(
@@ -68,7 +67,7 @@ class CurrentlyPlayingControllerRow extends ConsumerWidget {
 }
 
 class CurrentlyPlayingTitleWidget extends ConsumerWidget {
-  const CurrentlyPlayingTitleWidget({Key? key}) : super(key: key);
+  const CurrentlyPlayingTitleWidget() : super();
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
@@ -92,26 +91,20 @@ class CurrentlyPlayingTitleWidget extends ConsumerWidget {
 }
 
 class PlaybackControlsWidget extends StatelessWidget {
-  const PlaybackControlsWidget({
-    Key? key,
-  }) : super(key: key);
+  const PlaybackControlsWidget() : super();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 100,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Skip15AheadButtonWidget(),
-          Expanded(child: PlayButtonControllerWidget()),
-          SkipButtonWidget(),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        PlayButtonControllerWidget(),
+        SkipButtonWidget(),
+      ],
     );
   }
 }
-
+/*
 class Skip15AheadButtonWidget extends StatelessWidget {
   const Skip15AheadButtonWidget({
     Key? key,
@@ -127,6 +120,8 @@ class Skip15AheadButtonWidget extends StatelessWidget {
   }
 }
 
+ */
+
 class SkipButtonWidget extends StatelessWidget {
   const SkipButtonWidget({
     Key? key,
@@ -134,9 +129,14 @@ class SkipButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Icon(
-      Icons.skip_next,
-      size: 32,
+    return IconButton(
+      iconSize: 32,
+      onPressed: () {
+        null;
+      },
+      icon: Icon(
+        Icons.skip_next,
+      ),
     );
   }
 }
@@ -149,18 +149,16 @@ class PlayButtonControllerWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final playbackState = watch(playbackNotifierProvider);
-    return Expanded(
-      child: Consumer(builder: (context, watch, child) {
-        if (playbackState is PlaybackPlaying) {
-          return buildPauseButton(context);
-        } else if (playbackState is PlaybackLoading) {
-          return buildLoadingIndicator();
-        } else {
-          //paused, initial or error
-          return buildPlayButton(context);
-        }
-      }),
-    );
+    return Consumer(builder: (context, watch, child) {
+      if (playbackState is PlaybackPlaying) {
+        return buildPauseButton(context);
+      } else if (playbackState is PlaybackLoading) {
+        return buildLoadingIndicator();
+      } else {
+        //paused, initial or error
+        return buildPlayButton(context);
+      }
+    });
   }
 
   Widget buildPlayButton(BuildContext context) {
@@ -182,10 +180,7 @@ class PlayButtonControllerWidget extends ConsumerWidget {
     return Center(
       //center + sized box so that we are sure to stay on size 32
       child: SizedBox(
-        child: CircularProgressIndicator.adaptive(),
-        width: 32,
-        height: 32,
-      ),
+          width: 32, height: 32, child: CircularProgressIndicator.adaptive()),
     );
   }
 
@@ -195,7 +190,10 @@ class PlayButtonControllerWidget extends ConsumerWidget {
       icon: Icon(
         Icons.pause,
       ),
-      onPressed: context.read(playbackNotifierProvider.notifier).pausePlayback,
+      onPressed: () {
+        final notifier = context.read(playbackNotifierProvider.notifier);
+        notifier.pausePlayback();
+      },
     );
   }
 }

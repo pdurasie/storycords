@@ -74,4 +74,8 @@ class PlaybackNotifier extends StateNotifier<PlaybackState> {
   void pausePlayback() {
     _playbackService.pause();
   }
+
+  void skip15Ahead() {
+    _playbackService.fastForward15();
+  }
 }
