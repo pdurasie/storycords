@@ -14,6 +14,8 @@ class MyApp extends StatelessWidget {
       title: 'Tonband',
       theme: ThemeData(
         primaryColor: colorPrimary,
+        bottomSheetTheme:
+            BottomSheetThemeData(backgroundColor: Colors.transparent),
         textTheme: Theme.of(context)
             .textTheme
             .apply(bodyColor: colorTextPrimary, fontFamily: "Now"),

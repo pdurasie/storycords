@@ -4,8 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tonband/infrastructure/providers/providers.dart';
 import 'package:tonband/logic/playback/PlaybackNotifier.dart';
 
-import '../../style.dart';
-
 /// This widget is used for displaying the currently playing tonband and
 /// for skipping, pausing, start, ...
 ///
@@ -34,34 +32,14 @@ class CurrentlyPlayingControllerRow extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final playbackState = watch(playbackNotifierProvider);
-    return Material(
-      elevation: 20,
-      borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
-      clipBehavior: Clip.antiAlias,
-      child: AnimatedContainer(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [colorPrimary.withAlpha(130), colorPrimary])),
-        duration: Duration(milliseconds: 600),
-        curve: Curves.decelerate,
-        height: playbackState is PlaybackInitial
-            ? 0
-            : 80, //hide the controller row initially
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(horizontal: 12.0),
-        child: Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child: CurrentlyPlayingTitleWidget(),
-            ),
-            PlaybackControlsWidget(),
-          ],
+    return Row(
+      children: [
+        Expanded(
+          flex: 1,
+          child: CurrentlyPlayingTitleWidget(),
         ),
-      ),
+        PlaybackControlsWidget(),
+      ],
     );
   }
 }

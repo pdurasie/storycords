@@ -4,8 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tonband/infrastructure/providers/providers.dart';
 import 'package:tonband/models/Tonband.dart';
 import 'package:tonband/models/Topic.dart';
-import 'package:tonband/ui/components/CurrentlyPlayingControllerRow.dart';
-import 'package:tonband/ui/screentonbanddetailscreen/ScreenTonbandDetailPage.dart';
 
 import '../components/VerticalRatingBox.dart';
 import 'TonbandWidget.dart';
@@ -71,9 +69,6 @@ class TopicDetailBody extends ConsumerWidget {
             ),
           ),
         ),
-        Hero(
-            tag: CurrentlyPlayingControllerRow.tag,
-            child: CurrentlyPlayingControllerRow()),
       ],
     );
   }
@@ -91,9 +86,6 @@ class TopicTonbandOverview extends ConsumerWidget {
             tonband: tonbands.value.elementAt(index),
             onTap: () {
               playTonband(context, tonbands.value.elementAt(index));
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ScreenTonbandDetailPage(
-                      tonbands.value.elementAt(index))));
             },
           );
         },
