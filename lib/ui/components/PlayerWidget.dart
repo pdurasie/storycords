@@ -4,6 +4,51 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tonband/infrastructure/providers/providers.dart';
 import 'package:tonband/logic/playback/PlaybackNotifier.dart';
 
+import '../../style.dart';
+
+class PlayerWidget extends ConsumerWidget {
+  const PlayerWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, ScopedReader watch) {
+    const entrySlideInDuration = Duration(milliseconds: 800);
+
+    final playbackState = watch(playbackNotifierProvider);
+    final heightRatio = 0.1;
+    final initialHeight = MediaQuery.of(context).size.height * heightRatio;
+    return DraggableScrollableSheet(
+        expand: false,
+        minChildSize: heightRatio,
+        initialChildSize: heightRatio,
+        builder: (context, controller) {
+          return CollapsedPlayerWidget();
+        });
+  }
+}
+
+class CollapsedPlayerWidget extends StatelessWidget {
+  const CollapsedPlayerWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+        clipBehavior: Clip.antiAlias,
+        child: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [colorPrimaryLight, colorPrimary])),
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.symmetric(horizontal: 12.0),
+          child: CollapsedPlayerRow(),
+        ));
+  }
+}
+
 /// This widget is used for displaying the currently playing tonband and
 /// for skipping, pausing, start, ...
 ///
@@ -19,16 +64,16 @@ import 'package:tonband/logic/playback/PlaybackNotifier.dart';
 ///       children: [
 ///         ...
 ///         Hero(
-///             tag: CurrentlyPlayingControllerRow.tag,
-///             child: CurrentlyPlayingControllerRow())
+///             tag: CollapsedPlayerRow.tag,
+///             child: CollapsedPlayerRow())
 ///             ];
 ///
 /// Implement this on every single screen. It is invisible until a tonband is
 /// started, so you're safe to do so.
 ///
-class CurrentlyPlayingControllerRow extends ConsumerWidget {
+class CollapsedPlayerRow extends ConsumerWidget {
   static const String tag = "CurrentlyPlayingControllerRowTag";
-  const CurrentlyPlayingControllerRow({Key? key}) : super(key: key);
+  const CollapsedPlayerRow({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {

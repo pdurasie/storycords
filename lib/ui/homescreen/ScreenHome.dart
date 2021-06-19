@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tonband/ui/components/DraggablePlayController.dart';
+import 'package:tonband/ui/components/PlayerWidget.dart';
 
 import 'HomeBody.dart';
 import 'HomeWelcomeHeader.dart';
@@ -12,7 +12,7 @@ class ScreenHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomSheet: DraggablePlayController(),
+      bottomSheet: PlayerWidget(),
       // we want to implement a sort of parallax behaviour,
       // so header and body are aligned in a stack where we scroll
       // over the header.
