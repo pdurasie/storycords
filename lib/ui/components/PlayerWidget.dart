@@ -6,22 +6,22 @@ import 'package:tonband/logic/playback/PlaybackNotifier.dart';
 
 import '../../style.dart';
 
+/// Used as a base line to determine the height of the collapsed player widget.
+final _collapsedHeightRatio = 0.1;
+
 class PlayerWidget extends ConsumerWidget {
   const PlayerWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    const entrySlideInDuration = Duration(milliseconds: 800);
-
-    final playbackState = watch(playbackNotifierProvider);
-    final heightRatio = 0.1;
-    final initialHeight = MediaQuery.of(context).size.height * heightRatio;
     return DraggableScrollableSheet(
         expand: false,
-        minChildSize: heightRatio,
-        initialChildSize: heightRatio,
+        minChildSize: _collapsedHeightRatio,
+        initialChildSize: _collapsedHeightRatio,
         builder: (context, controller) {
-          return CollapsedPlayerWidget();
+          return SingleChildScrollView(
+              controller: controller, child: CollapsedPlayerWidget());
+          //return CollapsedPlayerWidget();
         });
   }
 }
@@ -37,6 +37,7 @@ class CollapsedPlayerWidget extends StatelessWidget {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
         clipBehavior: Clip.antiAlias,
         child: Container(
+          height: MediaQuery.of(context).size.height * _collapsedHeightRatio,
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
